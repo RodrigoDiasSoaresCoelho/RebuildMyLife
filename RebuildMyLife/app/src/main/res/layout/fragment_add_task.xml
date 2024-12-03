@@ -8,8 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutTitle"
@@ -64,27 +63,104 @@
                 android:maxLength="50" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvDate"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutDate"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/date"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/layoutDescription"
-            app:layout_constraintTop_toBottomOf="@+id/layoutDescription" />
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/date"
+            app:endIconMode="clear_text"
+            app:helperText="@string/required"
+            app:helperTextTextColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutDescription"
+            app:startIconDrawable="@drawable/ic_calendar">
 
-        <TextView
-            android:id="@+id/tvPriority"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/priority"
-            android:layout_marginTop="16dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/layoutDescription"
-            app:layout_constraintTop_toBottomOf="@+id/tvDate" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="Title"
+                android:enabled="false"
+                android:inputType="textAutoComplete"
+                android:maxLength="50" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/priorityContainer"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="@+id/layoutDate"
+            app:layout_constraintStart_toStartOf="@+id/layoutDate"
+            app:layout_constraintTop_toBottomOf="@+id/layoutDate">
+
+            <TextView
+                android:id="@+id/tvPriority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="@string/priority"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/priorityUrgent"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/dark_red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/priorityHigh"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/priorityHigh"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/red"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/priorityMedium"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/priorityMedium"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@color/yellow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/priorityNormal"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/green"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/priorityMedium"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/priorityLow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/light_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/priorityNormal"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tvRepeat"
@@ -95,7 +171,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/layoutDescription"
-            app:layout_constraintTop_toBottomOf="@+id/tvPriority" />
+            app:layout_constraintTop_toBottomOf="@+id/priorityContainer" />
 
         <TextView
             android:id="@+id/tvNotification"
