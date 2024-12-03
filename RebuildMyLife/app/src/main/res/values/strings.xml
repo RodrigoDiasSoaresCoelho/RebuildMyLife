@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">RebuildMyLife</string>
+    <string name="title">Title</string>
+    <string name="required">required*</string>
+    <string name="description">Description</string>
+    <string name="priority">Priority</string>
+    <string name="date">Date</string>
+    <string name="repeat">Repeat</string>
+    <string name="notification">Notification</string>
 </resources>
