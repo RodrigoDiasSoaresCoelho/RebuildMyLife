@@ -7,4 +7,16 @@
     <string name="date">Date</string>
     <string name="repeat">Repeat</string>
     <string name="notification">Notification</string>
+    <string name="urgent">Urgent</string>
+    <string name="high">High</string>
+    <string name="medium">Medium</string>
+    <string name="normal">Normal</string>
+    <string name="low">Low</string>
+    <string name="sunday">Sun</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">tue</string>
+    <string name="wed">Wed</string>
+    <string name="thu">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="Saturday">Sat</string>
 </resources>
