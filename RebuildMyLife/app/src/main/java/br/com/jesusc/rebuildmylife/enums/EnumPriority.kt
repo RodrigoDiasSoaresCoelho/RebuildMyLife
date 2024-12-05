@@ -1,6 +1,6 @@
 package br.com.jesusc.rebuildmylife.enums
 
-enum class Priority {
+enum class EnumPriority {
     LOW,
     NORMAL,
     MEDIUM,

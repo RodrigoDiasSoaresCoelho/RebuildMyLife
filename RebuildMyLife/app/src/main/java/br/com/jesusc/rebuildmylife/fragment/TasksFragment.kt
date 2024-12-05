@@ -27,6 +27,10 @@ class TasksFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_tasks, container, false)
+        var view = inflater.inflate(R.layout.fragment_tasks, container, false)
+
+
+
+        return view
     }
 }

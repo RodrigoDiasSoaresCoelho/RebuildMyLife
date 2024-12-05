@@ -7,6 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:background="@drawable/layout_curve"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
