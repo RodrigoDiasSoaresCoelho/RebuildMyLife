@@ -8,495 +8,530 @@
     android:background="@color/white"
     tools:context=".fragment.AddTaskFragment">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnSave"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tvPriority"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/priority"
-                android:textSize="16sp"
-                android:textStyle="bold"
-
-                app:layout_constraintStart_toStartOf="@+id/layoutDate"
-                app:layout_constraintTop_toBottomOf="@+id/layoutDate" />
-
-            <TextView
-                android:id="@+id/tvRepeat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/repeat"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/priorityContainer"
-                app:layout_constraintTop_toBottomOf="@+id/priorityContainer" />
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/repeatCheckBox"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvRepeat"
-                app:layout_constraintEnd_toEndOf="@+id/priorityContainer"
-                app:layout_constraintTop_toTopOf="@+id/tvRepeat" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutTitle"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/title"
-                app:counterEnabled="true"
-                app:counterMaxLength="20"
-                app:endIconMode="clear_text"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:startIconDrawable="@drawable/ic_title">
+                android:layout_height="match_parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtTile"
+                <TextView
+                    android:id="@+id/tvPriority"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/priority"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintStart_toStartOf="@+id/layoutDate"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutDate" />
+
+                <TextView
+                    android:id="@+id/tvRepeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/repeat"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/priorityContainer"
+                    app:layout_constraintTop_toBottomOf="@+id/priorityContainer" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/repeatCheckBox"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvRepeat"
+                    app:layout_constraintEnd_toEndOf="@+id/priorityContainer"
+                    app:layout_constraintTop_toTopOf="@+id/tvRepeat" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:autofillHints="Title"
-                    android:inputType="textAutoComplete"
-                    android:maxLength="20" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/description"
-                app:counterEnabled="true"
-                app:counterMaxLength="50"
-                app:endIconMode="clear_text"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.25"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutTitle"
-                app:startIconDrawable="@drawable/ic_description">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="Title"
-                    android:inputType="textAutoComplete"
-                    android:maxLength="50" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/layoutDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/date"
-                app:endIconMode="clear_text"
-                app:helperText="@string/required"
-                app:helperTextTextColor="@color/red"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.25"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutDescription"
-                app:startIconDrawable="@drawable/ic_calendar">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="Title"
-                    android:enabled="false"
-                    android:inputType="textAutoComplete"
-                    android:maxLength="50" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <LinearLayout
-                android:id="@+id/repeatContainer"
-                android:visibility="gone"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/layoutDate"
-                app:layout_constraintStart_toStartOf="@+id/layoutDate"
-                app:layout_constraintTop_toBottomOf="@+id/repeatCheckBox">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/sundayLayout"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/schedule_default"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/tvSun"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/sunday"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutMonday"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/schedule_default"
-                    app:layout_constraintBottom_toBottomOf="@+id/sundayLayout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toEndOf="@+id/sundayLayout"
-                    app:layout_constraintTop_toTopOf="@+id/sundayLayout">
-
-                    <TextView
-                        android:id="@+id/tvMon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/monday"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutTue"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/schedule_default"
-                    app:layout_constraintBottom_toBottomOf="@+id/LayoutMonday"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.1"
-                    app:layout_constraintStart_toEndOf="@+id/LayoutMonday"
-                    app:layout_constraintTop_toTopOf="@+id/LayoutMonday">
-
-                    <TextView
-                        android:id="@+id/tvTue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tuesday"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutWednesday"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/schedule_default"
-                    app:layout_constraintBottom_toBottomOf="@+id/LayoutTue"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/title"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@color/red"
+                    android:elevation="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/LayoutTue">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:startIconDrawable="@drawable/ic_title">
 
-                    <TextView
-                        android:id="@+id/tvWed"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtTile"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/wed"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:autofillHints="Title"
+                        android:inputType="textAutoComplete"
+                        android:maxLength="20" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutThursday"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/schedule_default"
-                    app:layout_constraintBottom_toBottomOf="@+id/LayoutWednesday"
-                    app:layout_constraintEnd_toStartOf="@+id/LayoutFriday"
-                    app:layout_constraintTop_toTopOf="@+id/LayoutTue"
-                    app:layout_constraintVertical_bias="1.0">
-
-                    <TextView
-                        android:id="@+id/tvThu"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/thu"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutFriday"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/schedule_default"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/LayoutSaturday"
-                    app:layout_constraintTop_toTopOf="@+id/LayoutThursday">
-
-                    <TextView
-                        android:id="@+id/tvFri"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/friday"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutSaturday"
-                    android:layout_width="40dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/schedule_default"
-                    app:layout_constraintBottom_toBottomOf="@+id/LayoutFriday"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/description"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="50"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@color/red"
+                    android:elevation="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/LayoutFriday">
+                    app:layout_constraintHorizontal_bias="0.25"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutTitle"
+                    app:startIconDrawable="@drawable/ic_description">
 
-                    <TextView
-                        android:id="@+id/tvSat"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDescription"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/Saturday"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/grey"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:autofillHints="Title"
+                        android:inputType="textAutoComplete"
+                        android:maxLength="50" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/priorityContainer"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/layoutDate"
-                app:layout_constraintStart_toStartOf="@+id/layoutDate"
-                app:layout_constraintTop_toBottomOf="@+id/tvPriority">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutUrgent"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityHigh"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/tvUrgent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/urgent"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:layout_width="20dp"
-                        android:layout_height="4dp"
-                        android:background="@color/dark_red"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvUrgent"
-                        app:layout_constraintVertical_bias="0.3" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutPriorityHigh"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityMedium"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/high"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:layout_width="20dp"
-                        android:layout_height="4dp"
-                        android:background="@color/red"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView"
-                        app:layout_constraintVertical_bias="0.3" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutPriorityMedium"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/priority_medium"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityLow"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/tvMedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/medium"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:layout_width="20dp"
-                        android:layout_height="4dp"
-                        android:background="@color/yellow"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvMedium"
-                        app:layout_constraintVertical_bias="0.3" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/LayoutPriorityLow"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/layoutDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:hint="@string/date"
+                    app:endIconMode="clear_text"
+                    app:helperText="@string/required"
+                    app:helperTextTextColor="@color/red"
+                    android:elevation="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintHorizontal_bias="0.25"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutDescription"
+                    app:startIconDrawable="@drawable/ic_calendar">
 
-                    <TextView
-                        android:id="@+id/tvLow"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDate"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/low"
-                        android:textSize="12sp"
+                        android:autofillHints="Title"
+                        android:enabled="false"
+                        android:inputType="textAutoComplete"
+                        android:maxLength="50" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/repeatContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/layoutDate"
+                    app:layout_constraintStart_toStartOf="@+id/layoutDate"
+                    app:layout_constraintTop_toBottomOf="@+id/repeatCheckBox">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/sundayLayout"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/schedule_default"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tvSun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sunday"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutMonday"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/schedule_default"
+                        app:layout_constraintBottom_toBottomOf="@+id/sundayLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintStart_toEndOf="@+id/sundayLayout"
+                        app:layout_constraintTop_toTopOf="@+id/sundayLayout">
+
+                        <TextView
+                            android:id="@+id/tvMon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/monday"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutTue"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/schedule_default"
+                        app:layout_constraintBottom_toBottomOf="@+id/LayoutMonday"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintStart_toEndOf="@+id/LayoutMonday"
+                        app:layout_constraintTop_toTopOf="@+id/LayoutMonday">
+
+                        <TextView
+                            android:id="@+id/tvTue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tuesday"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutWednesday"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/schedule_default"
+                        app:layout_constraintBottom_toBottomOf="@+id/LayoutTue"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/LayoutTue">
 
-                    <View
-                        android:layout_width="20dp"
-                        android:layout_height="4dp"
-                        android:background="@color/light_blue"
+                        <TextView
+                            android:id="@+id/tvWed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wed"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutThursday"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/schedule_default"
+                        app:layout_constraintBottom_toBottomOf="@+id/LayoutWednesday"
+                        app:layout_constraintEnd_toStartOf="@+id/LayoutFriday"
+                        app:layout_constraintTop_toTopOf="@+id/LayoutTue"
+                        app:layout_constraintVertical_bias="1.0">
+
+                        <TextView
+                            android:id="@+id/tvThu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/thu"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutFriday"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/schedule_default"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/LayoutSaturday"
+                        app:layout_constraintTop_toTopOf="@+id/LayoutThursday">
+
+                        <TextView
+                            android:id="@+id/tvFri"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/friday"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutSaturday"
+                        android:layout_width="40dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/schedule_default"
+                        app:layout_constraintBottom_toBottomOf="@+id/LayoutFriday"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/LayoutFriday">
+
+                        <TextView
+                            android:id="@+id/tvSat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/Saturday"
+                            android:textColor="@color/grey"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/priorityContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:elevation="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/layoutDate"
+                    app:layout_constraintStart_toStartOf="@+id/layoutDate"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPriority">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutUrgent"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityHigh"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tvUrgent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/urgent"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="4dp"
+                            android:background="@color/dark_red"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvUrgent"
+                            app:layout_constraintVertical_bias="0.3" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutPriorityHigh"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityMedium"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/high"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="4dp"
+                            android:background="@color/red"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView"
+                            app:layout_constraintVertical_bias="0.3" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutPriorityMedium"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/priority_medium"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityLow"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tvMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/medium"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="4dp"
+                            android:background="@color/yellow"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvMedium"
+                            app:layout_constraintVertical_bias="0.3" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutPriorityLow"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvLow"
-                        app:layout_constraintVertical_bias="0.3" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tvLow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/low"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="4dp"
+                            android:background="@color/light_blue"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvLow"
+                            app:layout_constraintVertical_bias="0.3" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
 
-            <TextView
-                android:id="@+id/tvNotification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/notification"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/layoutDescription"
-                app:layout_constraintTop_toBottomOf="@+id/repeatContainer" />
+                <TextView
+                    android:id="@+id/tvNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/notification"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/layoutDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/repeatContainer" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/cancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnSave" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>
