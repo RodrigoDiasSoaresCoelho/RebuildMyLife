@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "br.com.jesusc.rebuildmylife"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "br.com.jesusc.rebuildmylife"
@@ -55,10 +55,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Room
-    implementation(libs.androidx.room.runtime)
-
     // Kotlin Coroutines (opcional para operações assíncronas com Room)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+
+    implementation(libs.gson)
+
 }

@@ -28,6 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/taskName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Task Name"

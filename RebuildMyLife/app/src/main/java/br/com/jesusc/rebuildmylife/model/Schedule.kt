@@ -5,6 +5,8 @@ import br.com.jesusc.rebuildmylife.enums.EnumSchedule
 class Schedule {
     private val scheduleList = ArrayList<EnumSchedule>()
 
+    companion object
+
     fun addSchedule(dayWeek:EnumSchedule){
         scheduleList.add(dayWeek)
     }

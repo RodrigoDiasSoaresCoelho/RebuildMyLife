@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import br.com.jesusc.rebuildmylife.R
 import br.com.jesusc.rebuildmylife.fragment.AddTaskFragment
+import br.com.jesusc.rebuildmylife.fragment.TasksFragment
 import br.com.jesusc.rebuildmylife.util.Navigate
 
 class MainActivity : AppCompatActivity() {
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        Navigate.navigateFragment(this, AddTaskFragment.getInstance())
+//        Navigate.navigateFragment(this, AddTaskFragment.getInstance())
+        Navigate.navigateFragment(this, TasksFragment.getInstance())
     }
 }
