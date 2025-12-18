@@ -32,7 +32,7 @@
                     android:text="@string/priority"
                     android:textSize="16sp"
                     android:textStyle="bold"
-
+                    android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="@+id/layoutDate"
                     app:layout_constraintTop_toBottomOf="@+id/layoutDate" />
 
@@ -66,7 +66,6 @@
                     app:counterEnabled="true"
                     app:counterMaxLength="20"
                     app:endIconMode="clear_text"
-                    app:helperText="@string/required"
                     app:helperTextTextColor="@color/red"
                     android:elevation="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +92,6 @@
                     app:counterEnabled="true"
                     app:counterMaxLength="50"
                     app:endIconMode="clear_text"
-                    app:helperText="@string/required"
                     app:helperTextTextColor="@color/red"
                     android:elevation="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +117,6 @@
                     android:layout_marginEnd="16dp"
                     android:hint="@string/date"
                     app:endIconMode="clear_text"
-                    app:helperText="@string/required"
                     app:helperTextTextColor="@color/red"
                     android:elevation="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -347,6 +344,112 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/notificationContainer"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:elevation="20dp"
+                    app:layout_constraintEnd_toEndOf="@+id/layoutDate"
+                    app:layout_constraintStart_toStartOf="@+id/layoutDate"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNotification">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutSimple"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/schedule_selected"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityHigh"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tvSimple"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/simple"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutSchedule"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityMedium"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tvSchedule"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/schedule"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/LayoutNotificationFullScreen"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/LayoutPriorityLow"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tvFullScreen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fullscreen"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tvNotification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/notification"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/layoutDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/repeatContainer" />
+
+
+                <LinearLayout
                     android:id="@+id/priorityContainer"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
@@ -381,7 +484,7 @@
                         <View
                             android:layout_width="20dp"
                             android:layout_height="4dp"
-                            android:background="@color/dark_red"
+                            android:background="@color/URGENT"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -415,7 +518,7 @@
                         <View
                             android:layout_width="20dp"
                             android:layout_height="4dp"
-                            android:background="@color/red"
+                            android:background="@color/HIGH"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -450,7 +553,7 @@
                         <View
                             android:layout_width="20dp"
                             android:layout_height="4dp"
-                            android:background="@color/yellow"
+                            android:background="@color/MEDIUM"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -485,7 +588,7 @@
                         <View
                             android:layout_width="20dp"
                             android:layout_height="4dp"
-                            android:background="@color/light_blue"
+                            android:background="@color/LOW"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -496,19 +599,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
-
-                <TextView
-                    android:id="@+id/tvNotification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/notification"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/layoutDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/repeatContainer" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
@@ -518,6 +608,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/save"
+            android:textStyle="bold"
+            android:backgroundTint="@color/greenMedium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -528,6 +620,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/cancel"
+            android:textStyle="bold"
+            android:backgroundTint="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnSave" />
 

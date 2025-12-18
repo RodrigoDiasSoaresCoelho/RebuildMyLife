@@ -6,8 +6,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import br.com.jesusc.rebuildmylife.enums.EnumNotification
 import br.com.jesusc.rebuildmylife.enums.EnumPriority
-import br.com.jesusc.rebuildmylife.model.Notification
 import br.com.jesusc.rebuildmylife.model.Schedule
 import br.com.jesusc.rebuildmylife.model.Task
 import com.google.gson.Gson
@@ -41,7 +41,8 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
                 enumPriority TEXT NOT NULL, 
                 hour TEXT NOT NULL, 
                 repeat TEXT NOT NULL, 
-                notification TEXT NOT NULL
+                notification TEXT NOT NULL,
+                checked INTEGER DEFAULT 0
             )
         """.trimIndent()
         try {
@@ -65,9 +66,10 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
             put("title", task.title)
             put("description", task.description)
             put("enumPriority", task.enumPriority.name) // Salvamos como String
-            put("hour", task.hour)
+            put("hour", task.date)
             put("repeat", task.repeat.toJson()) // Convertido para JSON
-            put("notification", task.notification.toJson()) // Convertido para JSON
+            put("notification", task.notification.name) // Convertido para JSON
+            put("checked", if(!task.checked) 0 else 1)
         }
         return db.insert(TABLE_TASK, null, values)
     }
@@ -79,9 +81,10 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
             put("title", task.title)
             put("description", task.description)
             put("enumPriority", task.enumPriority.name)
-            put("hour", task.hour)
+            put("hour", task.date)
             put("repeat", task.repeat.toJson())
-            put("notification", task.notification.toJson())
+            put("notification", task.notification.name)
+            put("checked", if(!task.checked) 0 else 1)
         }
         return db.update(TABLE_TASK, values, "id = ?", arrayOf(task.id.toString()))
     }
@@ -136,9 +139,10 @@ fun Cursor.toTask(): Task {
     val enumPriority = EnumPriority.valueOf(getString(getColumnIndexOrThrow("enumPriority")))
     val hour = getString(getColumnIndexOrThrow("hour"))
     val repeat = Schedule.fromJson(getString(getColumnIndexOrThrow("repeat")))
-    val notification = Notification.fromJson(getString(getColumnIndexOrThrow("notification")))
+    val notification = EnumNotification.valueOf(getString(getColumnIndexOrThrow("notification")))
+    val checked = getInt(getColumnIndexOrThrow("checked")) == 1
 
-    return Task(id, title, description, enumPriority, hour, repeat, notification)
+    return Task(id, title, description, enumPriority, hour, repeat, notification, checked)
 }
 
 // Métodos de serialização e desserialização para Schedule
@@ -147,6 +151,6 @@ fun Schedule.Companion.fromJson(json: String): Schedule {
 }
 
 // Métodos de serialização e desserialização para Notification
-fun Notification.Companion.fromJson(json: String): Notification {
-    return Gson().fromJson(json, Notification::class.java)
-}
+//fun Notification.Companion.fromJson(json: String): Notification {
+//    return Gson().fromJson(json, Notification::class.java)
+//}

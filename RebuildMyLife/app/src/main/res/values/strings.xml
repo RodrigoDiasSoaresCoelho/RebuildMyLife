@@ -21,4 +21,9 @@
     <string name="Saturday">Sat</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="simple">Simple</string>
+    <string name="schedule">Schedule</string>
+    <string name="fullscreen">FullScreen</string>
+    <string name="task_name">Task Name</string>
+    <string name="checkbox">CheckBox</string>
 </resources>

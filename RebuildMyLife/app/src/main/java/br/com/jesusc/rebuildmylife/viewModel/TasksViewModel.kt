@@ -6,9 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.jesusc.rebuildmylife.helper.TaskDAO
 import br.com.jesusc.rebuildmylife.model.Task
+import br.com.jesusc.rebuildmylife.util.CallbackTask
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.collections.sortedWith
 
 class TaskViewModel(private val taskDAO: TaskDAO) : ViewModel() {
 
@@ -38,8 +40,21 @@ class TaskViewModel(private val taskDAO: TaskDAO) : ViewModel() {
             val taskList = withContext(Dispatchers.IO) {
                 taskDAO.getAllTasks()
             }
-            _tasks.postValue(taskList)
+
+            val sortedList = taskList.sortedWith(
+                compareBy<Task> { it.checked }
+                    .thenByDescending { it.enumPriority.ordinal }
+            )
+            _tasks.postValue(sortedList)
         }
+    }
+
+    fun taskChecked(callbackTask: CallbackTask){
+        _tasks.value = _tasks.value?.sortedWith(
+            compareBy<Task> { it.checked }
+                .thenByDescending { it.enumPriority.ordinal }
+        )
+        callbackTask.notifyDataSetChanged()
     }
 }
 

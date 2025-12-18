@@ -1,14 +1,17 @@
 package br.com.jesusc.rebuildmylife.model
 
+import br.com.jesusc.rebuildmylife.enums.EnumNotification
 import br.com.jesusc.rebuildmylife.enums.EnumPriority
+import java.io.Serializable
 
 
 data class Task(
     val id: Long = 0,
-    val title: String = "",
-    val description: String = "",
+    var title: String = "",
+    var description: String = "",
     var enumPriority: EnumPriority = EnumPriority.MEDIUM,
-    var hour: String = "",
-    val repeat: Schedule = Schedule(),
-    val notification: Notification = Notification()
-)
+    var date: String = "",
+    var repeat: Schedule = Schedule(),
+    var notification: EnumNotification = EnumNotification.SIMPLE,
+    var checked: Boolean = false
+): Serializable

@@ -4,40 +4,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="30dp"
-    android:layout_marginTop="8dp">
-
-    <View
-        android:id="@+id/priorityColor"
-        android:layout_width="5dp"
-        android:layout_height="0dp"
-        android:background="@color/dark_red"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/item_hour"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_margin="16dp"
-        android:gravity="center_vertical|center_horizontal"
-        android:text="08:00"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/priorityColor"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:elevation="5dp"
+    android:background="@color/URGENT"
+    android:layout_margin="8dp"
+    android:id="@+id/taskContainer">
 
     <TextView
         android:id="@+id/taskName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Task Name"
+        android:text="@string/task_name"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/item_hour"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/checkboxAdapter"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/checkbox"
+        android:src="@drawable/ic_square"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item_hour"
-        app:layout_constraintTop_toTopOf="@+id/item_hour" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

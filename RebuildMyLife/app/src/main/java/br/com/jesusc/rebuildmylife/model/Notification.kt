@@ -1,5 +1,10 @@
 package br.com.jesusc.rebuildmylife.model
 
-class Notification {
-    companion object
+import br.com.jesusc.rebuildmylife.enums.EnumNotification
+import br.com.jesusc.rebuildmylife.enums.EnumPriority
+
+data class Notification(
+    var enumNotification: EnumNotification = EnumNotification.SIMPLE,
+) {
+
 }

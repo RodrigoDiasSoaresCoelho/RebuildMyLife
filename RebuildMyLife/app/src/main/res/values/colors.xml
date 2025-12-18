@@ -3,9 +3,21 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0000</color>
-    <color name="dark_red">#951515</color>
+
+    <color name="URGENT">#450a1c</color>
+    <color name="URGENT_CHECKED">#88450a1c</color>
+    <color name="HIGH">#aa0a24</color>
+    <color name="HIGH_CHECKED">#88aa0a24</color>
+    <color name="MEDIUM">#FAB800</color>
+    <color name="MEDIUM_CHECKED">#88FAB800</color>
+    <color name="LOW">#09d8c6</color>
+    <color name="LOW_CHECKED">#8809d8c6</color>
+
+    <color name="purple">#3f1e39</color>
     <color name="yellow">#FAB800</color>
     <color name="green">#00FF0A</color>
-    <color name="light_blue">#01E2FF</color>
+    <color name="greenMedium">#00A406</color>
+    <color name="medium_blue">#173750</color>
+    <color name="dark_blue">#0e1a30</color>
     <color name="grey">#898989</color>
 </resources>
