@@ -18,6 +18,7 @@ class TaskAdapter (private val tasks: List<Task>, val callbackTask: CallbackTask
         val taskTitle: TextView = itemView.findViewById(R.id.taskName)
         val checkboxAdapter: ImageView = itemView.findViewById(R.id.checkboxAdapter)
         val taskContainer: ConstraintLayout = itemView.findViewById(R.id.taskContainer)
+        val checkboxContainer: ConstraintLayout = itemView.findViewById(R.id.checkboxContainer)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -30,7 +31,7 @@ class TaskAdapter (private val tasks: List<Task>, val callbackTask: CallbackTask
         holder.taskTitle.text = task.title
         setImg(task, holder)
 
-        holder.checkboxAdapter.setOnClickListener {
+        holder.checkboxContainer.setOnClickListener {
             task.checked = !task.checked
             setImg(task, holder)
 

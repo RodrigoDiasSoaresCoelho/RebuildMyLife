@@ -1,15 +1,14 @@
 package br.com.jesusc.rebuildmylife.fragment
 
-import android.content.Context
+import android.app.DatePickerDialog
 import android.graphics.Color
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import br.com.jesusc.rebuildmylife.viewModel.AddTaskViewModel
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import br.com.jesusc.rebuildmylife.R
 import br.com.jesusc.rebuildmylife.databinding.FragmentAddTaskBinding
 import br.com.jesusc.rebuildmylife.enums.EnumNotification
@@ -19,8 +18,10 @@ import br.com.jesusc.rebuildmylife.helper.DbHelper
 import br.com.jesusc.rebuildmylife.model.Notification
 import br.com.jesusc.rebuildmylife.model.Task
 import br.com.jesusc.rebuildmylife.util.Navigate
+import br.com.jesusc.rebuildmylife.viewModel.AddTaskViewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
 
 class AddTaskFragment : Fragment() {
 
@@ -28,6 +29,7 @@ class AddTaskFragment : Fragment() {
     private lateinit var task: Task
     private lateinit var notification: Notification
     private var edit = false
+
 
     companion object {
         private val INSTANCE: AddTaskFragment by lazy {
@@ -48,6 +50,8 @@ class AddTaskFragment : Fragment() {
         binding = FragmentAddTaskBinding.inflate(inflater, container, false)
 
         notification = Notification()
+
+        binding.edtDate.setOnClickListener { setupDatePicker() }
 
         binding.LayoutUrgent.setOnClickListener {
             setPriority(binding.LayoutUrgent)
@@ -374,6 +378,30 @@ class AddTaskFragment : Fragment() {
         }
 
         return validate
+    }
+
+    private fun setupDatePicker() {
+
+        val calendar = Calendar.getInstance()
+
+        val openDatePicker = {
+            DatePickerDialog(
+                requireContext(),
+                { _, year, month, dayOfMonth ->
+
+                    val formattedDate =
+                        "%02d/%02d/%d".format(dayOfMonth, month + 1, year)
+
+                    binding.edtDate.setText(formattedDate)
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+
+        binding.edtDate.setOnClickListener { openDatePicker() }
+        binding.layoutDate.setOnClickListener { openDatePicker() }
     }
 }
 

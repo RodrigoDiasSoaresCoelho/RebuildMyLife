@@ -129,10 +129,10 @@
                         android:id="@+id/edtDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:autofillHints="Title"
-                        android:enabled="false"
-                        android:inputType="textAutoComplete"
-                        android:maxLength="50" />
+                        android:autofillHints="Date"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:inputType="none" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
