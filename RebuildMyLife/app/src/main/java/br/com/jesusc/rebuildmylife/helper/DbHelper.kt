@@ -10,6 +10,7 @@ import br.com.jesusc.rebuildmylife.enums.EnumNotification
 import br.com.jesusc.rebuildmylife.enums.EnumPriority
 import br.com.jesusc.rebuildmylife.model.Schedule
 import br.com.jesusc.rebuildmylife.model.Task
+import br.com.jesusc.rebuildmylife.model.UiDate
 import com.google.gson.Gson
 
 class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VERSION) {
@@ -39,7 +40,7 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
                 title TEXT NOT NULL, 
                 description TEXT NOT NULL, 
                 enumPriority TEXT NOT NULL, 
-                hour TEXT NOT NULL, 
+                date TEXT NOT NULL, 
                 repeat TEXT NOT NULL, 
                 notification TEXT NOT NULL,
                 checked INTEGER DEFAULT 0
@@ -66,7 +67,7 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
             put("title", task.title)
             put("description", task.description)
             put("enumPriority", task.enumPriority.name) // Salvamos como String
-            put("hour", task.date)
+            put("date", task.date)
             put("repeat", task.repeat.toJson()) // Convertido para JSON
             put("notification", task.notification.name) // Convertido para JSON
             put("checked", if(!task.checked) 0 else 1)
@@ -81,7 +82,7 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
             put("title", task.title)
             put("description", task.description)
             put("enumPriority", task.enumPriority.name)
-            put("hour", task.date)
+            put("date", task.date)
             put("repeat", task.repeat.toJson())
             put("notification", task.notification.name)
             put("checked", if(!task.checked) 0 else 1)
@@ -122,6 +123,36 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
         cursor.close()
         return tasks
     }
+
+    fun getTasksByDate(selectedDate: UiDate): MutableList<Task> {
+        val db = readableDatabase
+
+//        val dateFormatted =
+//            "${selectedDate.year}-" +
+//                    "${selectedDate.month.toMonthNumber()}-" +
+//                    selectedDate.day.padStart(2, '0')
+
+        val dateFormatted =
+            "${selectedDate.day.padStart(2, '0')}/" +
+                    "${selectedDate.month.toMonthNumber()}/" +
+                    selectedDate.year
+
+        val cursor = db.rawQuery(
+            "SELECT * FROM $TABLE_TASK WHERE date = ?",
+            arrayOf(dateFormatted)
+        )
+
+        val tasks = mutableListOf<Task>()
+
+        if (cursor.moveToFirst()) {
+            do {
+                tasks.add(cursor.toTask())
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return tasks
+    }
 }
 
 // Métodos auxiliares para serialização e deserialização
@@ -137,17 +168,35 @@ fun Cursor.toTask(): Task {
     val title = getString(getColumnIndexOrThrow("title"))
     val description = getString(getColumnIndexOrThrow("description"))
     val enumPriority = EnumPriority.valueOf(getString(getColumnIndexOrThrow("enumPriority")))
-    val hour = getString(getColumnIndexOrThrow("hour"))
+    val date = getString(getColumnIndexOrThrow("date"))
     val repeat = Schedule.fromJson(getString(getColumnIndexOrThrow("repeat")))
     val notification = EnumNotification.valueOf(getString(getColumnIndexOrThrow("notification")))
     val checked = getInt(getColumnIndexOrThrow("checked")) == 1
 
-    return Task(id, title, description, enumPriority, hour, repeat, notification, checked)
+    return Task(id, title, description, enumPriority, date, repeat, notification, checked)
 }
 
 // Métodos de serialização e desserialização para Schedule
 fun Schedule.Companion.fromJson(json: String): Schedule {
     return Gson().fromJson(json, Schedule::class.java)
+}
+
+fun String.toMonthNumber(): String {
+    return when (lowercase()) {
+        "janeiro" -> "01"
+        "fevereiro" -> "02"
+        "março" -> "03"
+        "abril" -> "04"
+        "maio" -> "05"
+        "junho" -> "06"
+        "julho" -> "07"
+        "agosto" -> "08"
+        "setembro" -> "09"
+        "outubro" -> "10"
+        "novembro" -> "11"
+        "dezembro" -> "12"
+        else -> error("Mês inválido: $this")
+    }
 }
 
 // Métodos de serialização e desserialização para Notification

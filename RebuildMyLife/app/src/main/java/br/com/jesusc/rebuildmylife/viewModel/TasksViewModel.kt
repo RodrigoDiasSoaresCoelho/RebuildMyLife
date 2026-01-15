@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.jesusc.rebuildmylife.helper.TaskDAO
 import br.com.jesusc.rebuildmylife.model.Task
+import br.com.jesusc.rebuildmylife.model.UiDate
 import br.com.jesusc.rebuildmylife.util.CallbackTask
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,8 +16,8 @@ import kotlin.collections.sortedWith
 class TaskViewModel(private val taskDAO: TaskDAO) : ViewModel() {
 
     // LiveData para observar as Tasks
-    private val _tasks = MutableLiveData<List<Task>>()
-    val tasks: LiveData<List<Task>> get() = _tasks
+    private val _tasks = MutableLiveData<MutableList<Task>>()
+    val tasks: LiveData<MutableList<Task>> get() = _tasks
 
 
     // Função para inserir uma tarefa
@@ -34,18 +35,18 @@ class TaskViewModel(private val taskDAO: TaskDAO) : ViewModel() {
         taskDAO.delete(task.id)
     }
 
-    fun loadTasks() {
+    fun loadTasks(uiDate: UiDate) {
         viewModelScope.launch {
-            // Executar em uma thread de background
             val taskList = withContext(Dispatchers.IO) {
-                taskDAO.getAllTasks()
+                taskDAO.getTasksByDate(uiDate)
+//                taskDAO.getAllTasks()
             }
 
             val sortedList = taskList.sortedWith(
                 compareBy<Task> { it.checked }
                     .thenByDescending { it.enumPriority.ordinal }
             )
-            _tasks.postValue(sortedList)
+            _tasks.postValue(sortedList.toMutableList())
         }
     }
 
@@ -53,7 +54,7 @@ class TaskViewModel(private val taskDAO: TaskDAO) : ViewModel() {
         _tasks.value = _tasks.value?.sortedWith(
             compareBy<Task> { it.checked }
                 .thenByDescending { it.enumPriority.ordinal }
-        )
+        ) as MutableList<Task>?
         callbackTask.notifyDataSetChanged()
     }
 }

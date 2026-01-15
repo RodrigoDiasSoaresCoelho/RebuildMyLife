@@ -1,6 +1,7 @@
 package br.com.jesusc.rebuildmylife.helper
 
 import br.com.jesusc.rebuildmylife.model.Task
+import br.com.jesusc.rebuildmylife.model.UiDate
 
 class TaskDAO(private val dbHelper: DbHelper) {
 
@@ -38,5 +39,9 @@ class TaskDAO(private val dbHelper: DbHelper) {
     // Recuperar todas as tarefas
     fun getAllTasks(): List<Task> {
         return dbHelper.getAllTasks()
+    }
+
+    fun getTasksByDate(UiDate: UiDate): MutableList<Task> {
+        return dbHelper.getTasksByDate(UiDate)
     }
 }

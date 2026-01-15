@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.jesusc.rebuildmylife.R
 import br.com.jesusc.rebuildmylife.enums.EnumPriority
 import br.com.jesusc.rebuildmylife.model.Task
+import br.com.jesusc.rebuildmylife.model.UiDate
 import br.com.jesusc.rebuildmylife.util.CallbackTask
 
-class TaskAdapter (private val tasks: List<Task>, val callbackTask: CallbackTask) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter (private val tasks: MutableList<Task>, val callbackTask: CallbackTask) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val taskTitle: TextView = itemView.findViewById(R.id.taskName)
@@ -62,5 +63,10 @@ class TaskAdapter (private val tasks: List<Task>, val callbackTask: CallbackTask
             holder.checkboxAdapter.setImageResource(R.drawable.ic_check)
         else
             holder.checkboxAdapter.setImageResource(R.drawable.ic_square)
+    }
+    fun submitList(newList: MutableList<Task>) {
+        tasks.clear()
+        tasks.addAll(newList)
+        notifyDataSetChanged()
     }
 }
