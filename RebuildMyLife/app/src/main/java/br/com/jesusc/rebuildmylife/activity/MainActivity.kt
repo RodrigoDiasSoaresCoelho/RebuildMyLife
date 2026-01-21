@@ -20,9 +20,6 @@ import br.com.jesusc.rebuildmylife.util.Navigate
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -35,9 +32,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-
-
-//        Navigate.navigateFragment(this, AddTaskFragment.getInstance())
         Navigate.navigateFragment(this, TasksFragment.getInstance())
     }
 }

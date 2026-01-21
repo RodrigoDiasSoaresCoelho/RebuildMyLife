@@ -12,6 +12,10 @@ import br.com.jesusc.rebuildmylife.model.Schedule
 import br.com.jesusc.rebuildmylife.model.Task
 import br.com.jesusc.rebuildmylife.model.UiDate
 import com.google.gson.Gson
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
+import java.util.Locale
 
 class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VERSION) {
 
@@ -39,10 +43,10 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 title TEXT NOT NULL, 
                 description TEXT NOT NULL, 
-                enumPriority TEXT NOT NULL, 
-                date TEXT NOT NULL, 
+                enumPriority INTEGER NOT NULL, 
+                date INTEGER NOT NULL, 
                 repeat TEXT NOT NULL, 
-                notification TEXT NOT NULL,
+                notification INTEGER NOT NULL,
                 checked INTEGER DEFAULT 0
             )
         """.trimIndent()
@@ -66,10 +70,10 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
         val values = ContentValues().apply {
             put("title", task.title)
             put("description", task.description)
-            put("enumPriority", task.enumPriority.name) // Salvamos como String
+            put("enumPriority", task.enumPriority.value) // Salvamos como String
             put("date", task.date)
             put("repeat", task.repeat.toJson()) // Convertido para JSON
-            put("notification", task.notification.name) // Convertido para JSON
+            put("notification", task.notification.value) // Convertido para JSON
             put("checked", if(!task.checked) 0 else 1)
         }
         return db.insert(TABLE_TASK, null, values)
@@ -81,10 +85,10 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
         val values = ContentValues().apply {
             put("title", task.title)
             put("description", task.description)
-            put("enumPriority", task.enumPriority.name)
+            put("enumPriority", task.enumPriority.value)
             put("date", task.date)
             put("repeat", task.repeat.toJson())
-            put("notification", task.notification.name)
+            put("notification", task.notification.value)
             put("checked", if(!task.checked) 0 else 1)
         }
         return db.update(TABLE_TASK, values, "id = ?", arrayOf(task.id.toString()))
@@ -127,19 +131,10 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
     fun getTasksByDate(selectedDate: UiDate): MutableList<Task> {
         val db = readableDatabase
 
-//        val dateFormatted =
-//            "${selectedDate.year}-" +
-//                    "${selectedDate.month.toMonthNumber()}-" +
-//                    selectedDate.day.padStart(2, '0')
-
-        val dateFormatted =
-            "${selectedDate.day.padStart(2, '0')}/" +
-                    "${selectedDate.month.toMonthNumber()}/" +
-                    selectedDate.year
-
         val cursor = db.rawQuery(
-            "SELECT * FROM $TABLE_TASK WHERE date = ?",
-            arrayOf(dateFormatted)
+            "SELECT * FROM $TABLE_TASK WHERE date = ?" +
+                    " OR repeat LIKE ?\n",
+            arrayOf( selectedDate.date.toString(), "%${selectedDate.dayOfWeek}%")
         )
 
         val tasks = mutableListOf<Task>()
@@ -167,10 +162,10 @@ fun Cursor.toTask(): Task {
     val id = getLong(getColumnIndexOrThrow("id"))
     val title = getString(getColumnIndexOrThrow("title"))
     val description = getString(getColumnIndexOrThrow("description"))
-    val enumPriority = EnumPriority.valueOf(getString(getColumnIndexOrThrow("enumPriority")))
-    val date = getString(getColumnIndexOrThrow("date"))
+    val enumPriority = EnumPriority.fromValue(getInt(getColumnIndexOrThrow("enumPriority")))
+    val date = getLong(getColumnIndexOrThrow("date"))
     val repeat = Schedule.fromJson(getString(getColumnIndexOrThrow("repeat")))
-    val notification = EnumNotification.valueOf(getString(getColumnIndexOrThrow("notification")))
+    val notification = EnumNotification.fromValue(getInt(getColumnIndexOrThrow("notification")))
     val checked = getInt(getColumnIndexOrThrow("checked")) == 1
 
     return Task(id, title, description, enumPriority, date, repeat, notification, checked)
@@ -198,6 +193,7 @@ fun String.toMonthNumber(): String {
         else -> error("Mês inválido: $this")
     }
 }
+
 
 // Métodos de serialização e desserialização para Notification
 //fun Notification.Companion.fromJson(json: String): Notification {

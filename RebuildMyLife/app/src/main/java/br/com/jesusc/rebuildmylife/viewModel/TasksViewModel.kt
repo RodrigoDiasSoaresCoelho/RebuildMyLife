@@ -44,7 +44,7 @@ class TaskViewModel(private val taskDAO: TaskDAO) : ViewModel() {
 
             val sortedList = taskList.sortedWith(
                 compareBy<Task> { it.checked }
-                    .thenByDescending { it.enumPriority.ordinal }
+                    .thenBy { it.enumPriority.value }
             )
             _tasks.postValue(sortedList.toMutableList())
         }
@@ -53,7 +53,7 @@ class TaskViewModel(private val taskDAO: TaskDAO) : ViewModel() {
     fun taskChecked(callbackTask: CallbackTask){
         _tasks.value = _tasks.value?.sortedWith(
             compareBy<Task> { it.checked }
-                .thenByDescending { it.enumPriority.ordinal }
+                .thenBy { it.enumPriority.value }
         ) as MutableList<Task>?
         callbackTask.notifyDataSetChanged()
     }

@@ -8,14 +8,18 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import br.com.jesusc.rebuildmylife.R
+import br.com.jesusc.rebuildmylife.enums.EnumSchedule
 import br.com.jesusc.rebuildmylife.model.UiDate
 import br.com.jesusc.rebuildmylife.util.CallbackDate
+import br.com.jesusc.rebuildmylife.util.ConvertData
+import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
 
 class DateAdapter(private val uiDates: MutableList<UiDate>, val callbackDate: CallbackDate) :
     RecyclerView.Adapter<DateAdapter.TaskViewHolder>() {
+    private val converter = ConvertData()
 
     private var selectedPosition = RecyclerView.NO_POSITION
 
@@ -32,8 +36,8 @@ class DateAdapter(private val uiDates: MutableList<UiDate>, val callbackDate: Ca
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val date = uiDates[position]
-        holder.day.text = date.day
-        holder.dayOfWeek.text = date.dayOfWeek
+        holder.day.text = converter.getDay(date.date)
+        holder.dayOfWeek.text = converter.toShortName(date.dayOfWeek)
 
         val isSelected = position == selectedPosition
         if (isSelected) {
@@ -66,25 +70,26 @@ class DateAdapter(private val uiDates: MutableList<UiDate>, val callbackDate: Ca
         notifyDataSetChanged()
     }
 
-    fun selectTodayIfExists(): UiDate? {
-        val today = LocalDate.now()
+    fun selectPosition(position: Int) {
+        val previous = selectedPosition
+        selectedPosition = position
+
+        if (previous != RecyclerView.NO_POSITION) {
+            notifyItemChanged(previous)
+        }
+        notifyItemChanged(position)
+    }
+
+    fun selectTodayIfExists(): UiDate {
+        val todayEpochDay = LocalDate.now().toEpochDay()
 
         val position = uiDates.indexOfFirst {
-            it.day == today.dayOfMonth.toString() &&
-                    it.month.equals(
-                        today.month.getDisplayName(TextStyle.FULL, Locale("pt", "BR")),
-                        true
-                    ) &&
-                    it.year == today.year.toString()
+            it.date == todayEpochDay
         }
 
-        return if (position != -1) {
-            selectedPosition = position
-            notifyItemChanged(position)
-            uiDates[position]
-        } else {
-            null
-        }
+        selectedPosition = position
+        notifyItemChanged(position)
+        return uiDates[position]
     }
 
     fun getSelectedPosition(): Int = selectedPosition

@@ -9,6 +9,8 @@ interface CallbackTask {
     fun taskUpdated(task: Task)
     fun notifyDataSetChanged()
     fun taskClicked(task: Task)
+    fun tasksEmpty()
+    fun tasksNotEmpty()
 }
 
 

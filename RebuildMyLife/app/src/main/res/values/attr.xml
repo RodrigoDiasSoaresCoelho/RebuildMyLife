@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="appWindowBackground" format="color" />
+    <attr name="ViewBackground" format="color" />
+    <attr name="ViewBackground2" format="color" />
+    <attr name="Background" format="color" />
+    <attr name="buttonBackground" format="color" />
+    <attr name="buttonVoltar" format="color" />
+    <attr name="TextColor" format="color"/>
+    <attr name="textColorSecondary" format="color"/>
+    <attr name="iconColor" format="color"/>
+    <attr name="buttonTextColor" format="color"/>
+    <attr name="clickAquiColor" format="color"/>
+    <attr name="imageLogo" format="reference"/>
+</resources>

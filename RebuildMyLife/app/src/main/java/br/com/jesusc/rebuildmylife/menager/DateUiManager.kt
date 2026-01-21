@@ -1,6 +1,5 @@
 package br.com.jesusc.rebuildmylife.menager
 
-import androidx.recyclerview.widget.RecyclerView
 import br.com.jesusc.rebuildmylife.model.UiDate
 import java.time.LocalDate
 import java.time.YearMonth
@@ -12,72 +11,85 @@ class DateUiManager {
     private var currentYearMonth: YearMonth = YearMonth.now()
     private var selectedDate: LocalDate? = LocalDate.now()
 
-    private val locale = Locale("pt", "BR")
+    private val locale: Locale
+        get() = Locale.getDefault()
+
+    // -----------------------
+    // Public API
+    // -----------------------
+
+    fun setYearMonth(yearMonth: YearMonth) {
+        currentYearMonth = yearMonth
+        adjustSelectedDate()
+    }
+
+    fun getCurrentYearMonth(): YearMonth {
+        return currentYearMonth
+    }
 
     fun getCurrentMonthLabel(): String {
-        val month = currentYearMonth.month
+        val monthName = currentYearMonth.month
             .getDisplayName(TextStyle.FULL, locale)
-            .replaceFirstChar { it.uppercase() }
+            .replaceFirstChar { it.uppercase(locale) }
 
-        return "$month ${currentYearMonth.year}"
+        return "$monthName ${currentYearMonth.year}"
     }
 
     fun getDatesForUi(): MutableList<UiDate> {
         return generateDates(currentYearMonth)
     }
 
-    fun goToNextMonth(): List<UiDate> {
+    fun goToNextMonth(): MutableList<UiDate> {
         currentYearMonth = currentYearMonth.plusMonths(1)
         adjustSelectedDate()
         return getDatesForUi()
     }
 
-    fun goToPreviousMonth(): List<UiDate> {
+    fun goToPreviousMonth(): MutableList<UiDate> {
         currentYearMonth = currentYearMonth.minusMonths(1)
         adjustSelectedDate()
         return getDatesForUi()
     }
 
-    fun selectDate(day: Int) {
-        selectedDate = LocalDate.of(
-            currentYearMonth.year,
-            currentYearMonth.monthValue,
-            day
-        )
+    fun selectDate(epochDay: Long) {
+        selectedDate = LocalDate.ofEpochDay(epochDay)
     }
 
     fun getSelectedDate(): UiDate? {
-        val date = selectedDate ?: return null
-        return mapToUiDate(date)
+        return selectedDate?.let { mapToUiDate(it) }
     }
+
+    fun selectFirstValidDate(): UiDate {
+        val firstDate = currentYearMonth.atDay(1)
+        selectedDate = firstDate
+        return mapToUiDate(firstDate)
+    }
+
+    fun goToToday() {
+        val today = LocalDate.now()
+        currentYearMonth = YearMonth.from(today)
+        selectedDate = today
+    }
+
 
     // -----------------------
     // Internals
     // -----------------------
 
     private fun generateDates(yearMonth: YearMonth): MutableList<UiDate> {
-        val today = LocalDate.now()
-
         return (1..yearMonth.lengthOfMonth()).map { day ->
-            val date = LocalDate.of(yearMonth.year, yearMonth.monthValue, day)
+            val date = yearMonth.atDay(day)
 
             UiDate(
-                day = day.toString(),
-                dayOfWeek = date.dayOfWeek
-                    .getDisplayName(TextStyle.SHORT, locale)
-                    .uppercase(),
-                month = date.month
-                    .getDisplayName(TextStyle.FULL, locale),
-                year = yearMonth.year.toString()
+                date = date.toEpochDay(),
+                dayOfWeek = date.dayOfWeek.value // 1 (Mon) .. 7 (Sun)
             )
-        } as MutableList<UiDate>
+        }.toMutableList()
     }
 
     private fun adjustSelectedDate() {
         selectedDate?.let {
-            if (it.year != currentYearMonth.year ||
-                it.month != currentYearMonth.month
-            ) {
+            if (YearMonth.from(it) != currentYearMonth) {
                 selectedDate = null
             }
         }
@@ -85,14 +97,8 @@ class DateUiManager {
 
     private fun mapToUiDate(date: LocalDate): UiDate {
         return UiDate(
-            day = date.dayOfMonth.toString(),
-            dayOfWeek = date.dayOfWeek
-                .getDisplayName(TextStyle.SHORT, locale)
-                .uppercase(),
-            month = date.month
-                .getDisplayName(TextStyle.FULL, locale),
-            year = date.year.toString()
+            date = date.toEpochDay(),
+            dayOfWeek = date.dayOfWeek.value
         )
     }
-
 }

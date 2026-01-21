@@ -10,7 +10,7 @@ data class Task(
     var title: String = "",
     var description: String = "",
     var enumPriority: EnumPriority = EnumPriority.MEDIUM,
-    var date: String = "",
+    var date: Long = 0,
     var repeat: Schedule = Schedule(),
     var notification: EnumNotification = EnumNotification.SIMPLE,
     var checked: Boolean = false

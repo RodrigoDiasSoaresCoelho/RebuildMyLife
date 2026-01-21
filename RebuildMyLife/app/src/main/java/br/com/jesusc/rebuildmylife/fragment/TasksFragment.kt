@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.jesusc.rebuildmylife.adapter.DateAdapter
 import br.com.jesusc.rebuildmylife.adapter.TaskAdapter
 import br.com.jesusc.rebuildmylife.databinding.FragmentTasksBinding
+import br.com.jesusc.rebuildmylife.dialog.MonthYearPickerDialog
 import br.com.jesusc.rebuildmylife.helper.DbHelper
 import br.com.jesusc.rebuildmylife.helper.TaskDAO
 import br.com.jesusc.rebuildmylife.menager.DateUiManager
@@ -21,6 +22,7 @@ import br.com.jesusc.rebuildmylife.util.CallbackTask
 import br.com.jesusc.rebuildmylife.util.Navigate
 import br.com.jesusc.rebuildmylife.viewModel.TaskViewModel
 import br.com.jesusc.rebuildmylife.viewModel.TaskViewModelFactory
+import java.time.YearMonth
 
 class TasksFragment : Fragment(), CallbackDate {
     lateinit var binding: FragmentTasksBinding
@@ -32,6 +34,7 @@ class TasksFragment : Fragment(), CallbackDate {
     private lateinit var dbHelper: DbHelper
     private lateinit var taskDAO: TaskDAO
     private val dateManager = DateUiManager()
+    private lateinit var uiDate: UiDate
 
     init{
         callbackTask = setCallback()
@@ -45,12 +48,6 @@ class TasksFragment : Fragment(), CallbackDate {
         fun getInstance(): TasksFragment {
             return INSTANCE
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
     }
 
     override fun onCreateView(
@@ -69,11 +66,18 @@ class TasksFragment : Fragment(), CallbackDate {
         taskViewModel.tasks.observe(viewLifecycleOwner) { taskList ->
             taskAdapter = TaskAdapter(taskList, setCallback())
             binding.recyclerTasks.adapter = taskAdapter
-//            taskAdapter.submitList(taskList)
+            if (taskList.isEmpty()){
+                callbackTask.tasksEmpty()
+            }else{
+                callbackTask.tasksNotEmpty()
+            }
         }
 
         binding.btnAddTask.setOnClickListener({
-            Navigate.navigateFragment(requireActivity(), AddTaskFragment.getInstance())
+            val bundle = Bundle().apply {
+                putLong("selectedDate", uiDate.date)
+            }
+            Navigate.navigateFragment(requireActivity(), AddTaskFragment.getInstance(),bundle)
         })
 
         val list = dateManager.getDatesForUi()
@@ -85,9 +89,10 @@ class TasksFragment : Fragment(), CallbackDate {
             LinearLayoutManager.HORIZONTAL,
             false
         )
+
         adapter.submitList(dateManager.getDatesForUi())
-        val uiDate = adapter.selectTodayIfExists()
-        if(uiDate != null)
+
+        uiDate = adapter.selectTodayIfExists()
         taskViewModel.loadTasks(uiDate)
 
         binding.recyclerDay.post {
@@ -101,17 +106,31 @@ class TasksFragment : Fragment(), CallbackDate {
         binding.recyclerDay.adapter = adapter
 
         binding.txtMonthAndYear.text = dateManager.getCurrentMonthLabel()
-//
+
+        binding.txtMonthAndYear.setOnClickListener {
+            MonthYearPickerDialog(
+                requireContext(),
+                dateManager.getCurrentYearMonth()
+            ) { selectedYearMonth ->
+
+                updateMonthAndDays(selectedYearMonth)
+            }.show()
+        }
+
+        binding.selectMonthAndYear.setOnClickListener {
+            MonthYearPickerDialog(
+                requireContext(),
+                dateManager.getCurrentYearMonth()
+            ) { selectedYearMonth ->
+                updateMonthAndDays(selectedYearMonth)
+            }.show()
+        }
+
+        binding.txtToday.setOnClickListener {
+            today()
+        }
+
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Configurar o RecyclerView
-
-
-
     }
 
     fun setCallback(): CallbackTask{
@@ -144,13 +163,71 @@ class TasksFragment : Fragment(), CallbackDate {
                 Navigate.navigateFragment(requireActivity(),AddTaskFragment.getInstance(),bundle)
             }
 
+            override fun tasksEmpty() {
+                binding.lottieAnimationViewArrow.visibility = View.VISIBLE
+            }
+
+            override fun tasksNotEmpty() {
+                binding.lottieAnimationViewArrow.visibility = View.GONE
+            }
+
         }
     }
 
     override fun dateSelected(uiDate: UiDate) {
-        dateManager.selectDate(uiDate.day.toInt())
+        this.uiDate = uiDate
+        dateManager.selectDate(uiDate.date)
         (binding.recyclerDay.layoutManager as LinearLayoutManager)
             .scrollToPositionWithOffset(adapter.getSelectedPosition(), binding.recyclerDay.width / 2)
         taskViewModel.loadTasks(uiDate)
+        binding.txtToday.visibility = View.VISIBLE
     }
+
+    fun today() {
+        dateManager.goToToday()
+
+        adapter.submitList(dateManager.getDatesForUi())
+
+        uiDate = adapter.selectTodayIfExists()
+            ?: dateManager.getSelectedDate()!!
+
+        binding.txtMonthAndYear.text = dateManager.getCurrentMonthLabel()
+
+        taskViewModel.loadTasks(uiDate)
+
+        binding.recyclerDay.post {
+            val position = adapter.getSelectedPosition()
+            if (position != RecyclerView.NO_POSITION) {
+                (binding.recyclerDay.layoutManager as LinearLayoutManager)
+                    .scrollToPositionWithOffset(position, binding.recyclerDay.width / 2)
+            }
+        }
+
+        binding.txtToday.visibility = View.GONE
+    }
+
+
+    private fun updateMonthAndDays(yearMonth: YearMonth) {
+        dateManager.setYearMonth(yearMonth)
+
+        val days = dateManager.getDatesForUi()
+        adapter.submitList(days)
+
+        uiDate = days.firstOrNull()
+            ?: return
+
+        adapter.selectPosition(0)
+
+        binding.txtMonthAndYear.text = dateManager.getCurrentMonthLabel()
+
+        binding.recyclerDay.post {
+            (binding.recyclerDay.layoutManager as LinearLayoutManager)
+                .scrollToPositionWithOffset(0, 0)
+        }
+
+        binding.txtToday.visibility = View.VISIBLE
+
+        taskViewModel.loadTasks(uiDate)
+    }
+
 }
