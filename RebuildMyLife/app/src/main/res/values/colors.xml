@@ -15,13 +15,13 @@
 <!--    <color name="LOW_CHECKED">#8809d8c6</color>-->
 
     <color name="URGENT">#7550f5</color>
-    <color name="URGENT_CHECKED">#805550B9</color>
+    <color name="URGENT_CHECKED">#807550f5</color>
     <color name="HIGH">#fe655d</color>
-    <color name="HIGH_CHECKED">#80EF6A41</color>
+    <color name="HIGH_CHECKED">#80fe655d</color>
     <color name="MEDIUM">#ffc54a</color>
-    <color name="MEDIUM_CHECKED">#80EEAF44</color>
+    <color name="MEDIUM_CHECKED">#80ffc54a</color>
     <color name="LOW">#55c267</color>
-    <color name="LOW_CHECKED">#804CB5F4</color>
+    <color name="LOW_CHECKED">#8055c267</color>
 
     <color name="Select_day">#3D9BD7</color>
 
