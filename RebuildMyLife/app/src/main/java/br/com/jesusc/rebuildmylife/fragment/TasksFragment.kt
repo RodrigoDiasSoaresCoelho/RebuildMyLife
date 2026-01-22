@@ -23,12 +23,13 @@ import br.com.jesusc.rebuildmylife.util.Navigate
 import br.com.jesusc.rebuildmylife.viewModel.TaskViewModel
 import br.com.jesusc.rebuildmylife.viewModel.TaskViewModelFactory
 import java.time.YearMonth
+import kotlin.collections.mutableListOf
 
 class TasksFragment : Fragment(), CallbackDate {
-    lateinit var binding: FragmentTasksBinding
+
+    private lateinit var binding: FragmentTasksBinding
     private lateinit var taskViewModel: TaskViewModel
     private lateinit var taskAdapter: TaskAdapter
-    private var callbackTask: CallbackTask
 
     private lateinit var adapter: DateAdapter
     private lateinit var dbHelper: DbHelper
@@ -36,53 +37,61 @@ class TasksFragment : Fragment(), CallbackDate {
     private val dateManager = DateUiManager()
     private lateinit var uiDate: UiDate
 
-    init{
-        callbackTask = setCallback()
-    }
+    private val callbackTask: CallbackTask by lazy { setCallback() }
 
     companion object {
-        private val INSTANCE: TasksFragment by lazy {
-            TasksFragment()
-        }
+        private val INSTANCE: TasksFragment by lazy { TasksFragment() }
 
-        fun getInstance(): TasksFragment {
-            return INSTANCE
-        }
+        fun getInstance(): TasksFragment = INSTANCE
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = FragmentTasksBinding.inflate(inflater, container, false)
 
+        // -----------------------------
+        // Recycler de TASKS
+        // -----------------------------
         binding.recyclerTasks.layoutManager = LinearLayoutManager(requireContext())
 
         dbHelper = DbHelper.getInstance(requireContext())
         taskDAO = TaskDAO.getInstance(dbHelper)
+
         val factory = TaskViewModelFactory(taskDAO)
         taskViewModel = ViewModelProvider(this, factory)[TaskViewModel::class.java]
 
+        taskAdapter = TaskAdapter(callbackTask)
+        binding.recyclerTasks.adapter = taskAdapter
+
         taskViewModel.tasks.observe(viewLifecycleOwner) { taskList ->
-            taskAdapter = TaskAdapter(taskList, setCallback())
-            binding.recyclerTasks.adapter = taskAdapter
-            if (taskList.isEmpty()){
+            taskAdapter.submitList(taskList.toMutableList())
+
+            if (taskList.isEmpty()) {
                 callbackTask.tasksEmpty()
-            }else{
+            } else {
                 callbackTask.tasksNotEmpty()
             }
         }
 
-        binding.btnAddTask.setOnClickListener({
+        binding.btnAddTask.setOnClickListener {
             val bundle = Bundle().apply {
                 putLong("selectedDate", uiDate.date)
             }
-            Navigate.navigateFragment(requireActivity(), AddTaskFragment.getInstance(),bundle)
-        })
+            Navigate.navigateFragment(
+                requireActivity(),
+                AddTaskFragment.getInstance(),
+                bundle
+            )
+        }
 
-        val list = dateManager.getDatesForUi()
-        adapter = DateAdapter(list, this)
-
+        // -----------------------------
+        // Recycler de DIAS (NÃO ALTERADO)
+        // -----------------------------
+        adapter = DateAdapter(dateManager.getDatesForUi(), this)
 
         binding.recyclerDay.layoutManager = LinearLayoutManager(
             requireContext(),
@@ -99,7 +108,10 @@ class TasksFragment : Fragment(), CallbackDate {
             val position = adapter.getSelectedPosition()
             if (position != RecyclerView.NO_POSITION) {
                 (binding.recyclerDay.layoutManager as LinearLayoutManager)
-                    .scrollToPositionWithOffset(position, binding.recyclerDay.width / 2)
+                    .scrollToPositionWithOffset(
+                        position,
+                        binding.recyclerDay.width / 2
+                    )
             }
         }
 
@@ -108,22 +120,11 @@ class TasksFragment : Fragment(), CallbackDate {
         binding.txtMonthAndYear.text = dateManager.getCurrentMonthLabel()
 
         binding.txtMonthAndYear.setOnClickListener {
-            MonthYearPickerDialog(
-                requireContext(),
-                dateManager.getCurrentYearMonth()
-            ) { selectedYearMonth ->
-
-                updateMonthAndDays(selectedYearMonth)
-            }.show()
+            openMonthYearPicker()
         }
 
         binding.selectMonthAndYear.setOnClickListener {
-            MonthYearPickerDialog(
-                requireContext(),
-                dateManager.getCurrentYearMonth()
-            ) { selectedYearMonth ->
-                updateMonthAndDays(selectedYearMonth)
-            }.show()
+            openMonthYearPicker()
         }
 
         binding.txtToday.setOnClickListener {
@@ -133,34 +134,36 @@ class TasksFragment : Fragment(), CallbackDate {
         return binding.root
     }
 
-    fun setCallback(): CallbackTask{
+    // --------------------------------
+    // CALLBACK DAS TASKS
+    // --------------------------------
+    private fun setCallback(): CallbackTask {
         return object : CallbackTask {
+
             override fun taskChecked(task: Task) {
+                task.checked = !task.checked
                 taskViewModel.updateTask(task)
-                taskViewModel.taskChecked(callbackTask)
             }
 
-            override fun taskUnChecked(task: Task) {
-                TODO("Not yet implemented")
-            }
+            override fun taskUnChecked(task: Task) {}
 
-            override fun taskDeleted(task: Task) {
-                TODO("Not yet implemented")
-            }
+            override fun taskDeleted(task: Task) {}
 
-            override fun taskUpdated(task: Task) {
-                TODO("Not yet implemented")
-            }
+            override fun taskUpdated(task: Task) {}
 
             override fun notifyDataSetChanged() {
-                taskAdapter.notifyDataSetChanged()
+                // não usamos mais
             }
 
             override fun taskClicked(task: Task) {
                 val bundle = Bundle().apply {
                     putSerializable("task", task)
                 }
-                Navigate.navigateFragment(requireActivity(),AddTaskFragment.getInstance(),bundle)
+                Navigate.navigateFragment(
+                    requireActivity(),
+                    AddTaskFragment.getInstance(),
+                    bundle
+                )
             }
 
             override fun tasksEmpty() {
@@ -170,20 +173,32 @@ class TasksFragment : Fragment(), CallbackDate {
             override fun tasksNotEmpty() {
                 binding.lottieAnimationViewArrow.visibility = View.GONE
             }
-
         }
     }
 
+    // --------------------------------
+    // CALLBACK DO RECYCLER DE DIAS
+    // --------------------------------
     override fun dateSelected(uiDate: UiDate) {
         this.uiDate = uiDate
+
         dateManager.selectDate(uiDate.date)
+
         (binding.recyclerDay.layoutManager as LinearLayoutManager)
-            .scrollToPositionWithOffset(adapter.getSelectedPosition(), binding.recyclerDay.width / 2)
+            .scrollToPositionWithOffset(
+                adapter.getSelectedPosition(),
+                binding.recyclerDay.width / 2
+            )
+
         taskViewModel.loadTasks(uiDate)
+
         binding.txtToday.visibility = View.VISIBLE
     }
 
-    fun today() {
+    // --------------------------------
+    // BOTÃO "HOJE"
+    // --------------------------------
+    private fun today() {
         dateManager.goToToday()
 
         adapter.submitList(dateManager.getDatesForUi())
@@ -199,23 +214,26 @@ class TasksFragment : Fragment(), CallbackDate {
             val position = adapter.getSelectedPosition()
             if (position != RecyclerView.NO_POSITION) {
                 (binding.recyclerDay.layoutManager as LinearLayoutManager)
-                    .scrollToPositionWithOffset(position, binding.recyclerDay.width / 2)
+                    .scrollToPositionWithOffset(
+                        position,
+                        binding.recyclerDay.width / 2
+                    )
             }
         }
 
         binding.txtToday.visibility = View.GONE
     }
 
-
+    // --------------------------------
+    // ATUALIZA MÊS / ANO
+    // --------------------------------
     private fun updateMonthAndDays(yearMonth: YearMonth) {
         dateManager.setYearMonth(yearMonth)
 
         val days = dateManager.getDatesForUi()
         adapter.submitList(days)
 
-        uiDate = days.firstOrNull()
-            ?: return
-
+        uiDate = days.firstOrNull() ?: return
         adapter.selectPosition(0)
 
         binding.txtMonthAndYear.text = dateManager.getCurrentMonthLabel()
@@ -230,4 +248,12 @@ class TasksFragment : Fragment(), CallbackDate {
         taskViewModel.loadTasks(uiDate)
     }
 
+    private fun openMonthYearPicker() {
+        MonthYearPickerDialog(
+            requireContext(),
+            dateManager.getCurrentYearMonth()
+        ) { selectedYearMonth ->
+            updateMonthAndDays(selectedYearMonth)
+        }.show()
+    }
 }
