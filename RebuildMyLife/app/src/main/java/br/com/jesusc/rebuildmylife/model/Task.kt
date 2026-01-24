@@ -14,4 +14,17 @@ data class Task(
     var repeat: Schedule = Schedule(),
     var notification: EnumNotification = EnumNotification.SIMPLE,
     var checked: Boolean = false
-): Serializable
+): Serializable{
+
+    fun cloneForDate(newDate: Long): Task {
+        return Task(
+            title = title,
+            description = description,
+            enumPriority = enumPriority,
+            date = newDate,
+            repeat = repeat,
+            notification = notification,
+            checked = false // SEMPRE false
+        )
+    }
+}

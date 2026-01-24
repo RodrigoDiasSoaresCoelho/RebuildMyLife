@@ -128,13 +128,64 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
         return tasks
     }
 
-    fun getTasksByDate(selectedDate: UiDate): MutableList<Task> {
-        val db = readableDatabase
+    fun generateDailyTasksIfNeeded(selectedDate: UiDate) {
+        val db = writableDatabase
 
+        // 1️⃣ Busca tasks que repetem no dia da semana
         val cursor = db.rawQuery(
-            "SELECT * FROM $TABLE_TASK WHERE date = ?" +
-                    " OR repeat LIKE ?\n",
-            arrayOf( selectedDate.date.toString(), "%${selectedDate.dayOfWeek}%")
+            """
+        SELECT * FROM $TABLE_TASK 
+        WHERE repeat LIKE ?
+        """.trimIndent(),
+            arrayOf("%${selectedDate.dayOfWeek}%")
+        )
+
+        if (!cursor.moveToFirst()) {
+            cursor.close()
+            return
+        }
+
+        do {
+            val baseTask = cursor.toTask()
+
+            // 2️⃣ Verifica se já existe task clonada para esse dia
+            val existsCursor = db.rawQuery(
+                """
+            SELECT id FROM $TABLE_TASK 
+            WHERE title = ?
+            AND date = ?
+            """.trimIndent(),
+                arrayOf(baseTask.title, selectedDate.date.toString())
+            )
+
+            val alreadyExists = existsCursor.moveToFirst()
+            existsCursor.close()
+
+            // 3️⃣ Se não existir, cria o clone
+            if (!alreadyExists) {
+                val clonedTask = baseTask.cloneForDate(selectedDate.date)
+                insertTask(clonedTask)
+            }
+
+        } while (cursor.moveToNext())
+
+        cursor.close()
+    }
+
+
+    fun getTasksByDate(selectedDate: UiDate): MutableList<Task> {
+
+        // 1️⃣ Garante que as tasks do dia existam
+        generateDailyTasksIfNeeded(selectedDate)
+
+        val db = readableDatabase
+        val cursor = db.rawQuery(
+            """
+        SELECT * FROM $TABLE_TASK 
+        WHERE date = ?
+        ORDER BY enumPriority ASC
+        """.trimIndent(),
+            arrayOf(selectedDate.date.toString())
         )
 
         val tasks = mutableListOf<Task>()
@@ -148,6 +199,7 @@ class DbHelper(context: Context?) : SQLiteOpenHelper(context, NOME_DB, null, VER
         cursor.close()
         return tasks
     }
+
 }
 
 // Métodos auxiliares para serialização e deserialização

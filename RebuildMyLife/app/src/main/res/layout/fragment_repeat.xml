@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.RepeatFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Repeat"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/containerNever"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbNever"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:checked="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Never"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbNever"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbNever" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/containerDaily"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbDaily"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txtDaily"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Daily"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbDaily"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:visibility="gone"
+                            android:id="@+id/edtDaily"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/txtDaily"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/txtDaily2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="day"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtDaily"
+                            app:layout_constraintStart_toEndOf="@+id/edtDaily"
+                            app:layout_constraintTop_toTopOf="@+id/txtDaily" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbDaily" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/containerWeekly"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbWeekly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Weekly"
+                            app:layout_constraintBottom_toBottomOf="@+id/rbWeekly"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbWeekly"
+                            app:layout_constraintTop_toTopOf="@+id/rbWeekly" />
+
+                        <LinearLayout
+                            android:id="@+id/repeatContainer"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/rbWeekly"
+                            app:layout_constraintTop_toBottomOf="@+id/rbWeekly">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/sundayLayout"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/schedule_default"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <TextView
+                                    android:id="@+id/tvSun"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/sunday"
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/LayoutMonday"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/schedule_default"
+                                app:layout_constraintBottom_toBottomOf="@+id/sundayLayout"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.1"
+                                app:layout_constraintStart_toEndOf="@+id/sundayLayout"
+                                app:layout_constraintTop_toTopOf="@+id/sundayLayout">
+
+                                <TextView
+                                    android:id="@+id/tvMon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/monday"
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/LayoutTue"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/schedule_default"
+                                app:layout_constraintBottom_toBottomOf="@+id/LayoutMonday"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.1"
+                                app:layout_constraintStart_toEndOf="@+id/LayoutMonday"
+                                app:layout_constraintTop_toTopOf="@+id/LayoutMonday">
+
+                                <TextView
+                                    android:id="@+id/tvTue"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tuesday"
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/LayoutWednesday"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/schedule_default"
+                                app:layout_constraintBottom_toBottomOf="@+id/LayoutTue"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/LayoutTue">
+
+                                <TextView
+                                    android:id="@+id/tvWed"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/wed"
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/LayoutThursday"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/schedule_default"
+                                app:layout_constraintBottom_toBottomOf="@+id/LayoutWednesday"
+                                app:layout_constraintEnd_toStartOf="@+id/LayoutFriday"
+                                app:layout_constraintTop_toTopOf="@+id/LayoutTue"
+                                app:layout_constraintVertical_bias="1.0">
+
+                                <TextView
+                                    android:id="@+id/tvThu"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/thu"
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/LayoutFriday"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/schedule_default"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/LayoutSaturday"
+                                app:layout_constraintTop_toTopOf="@+id/LayoutThursday">
+
+                                <TextView
+                                    android:id="@+id/tvFri"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/friday"
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/LayoutSaturday"
+                                android:layout_width="40dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/schedule_default"
+                                app:layout_constraintBottom_toBottomOf="@+id/LayoutFriday"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/LayoutFriday">
+
+                                <TextView
+                                    android:id="@+id/tvSat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/Saturday"
+                                    android:textColor="@color/grey"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbWeekly" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/containerMonthly"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbMonthly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txtMonthly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Monthly"
+                            app:layout_constraintBottom_toBottomOf="@+id/rbMonthly"
+                            app:layout_constraintStart_toEndOf="@+id/rbMonthly"
+                            app:layout_constraintTop_toTopOf="@+id/rbMonthly" />
+
+                        <EditText
+                            android:visibility="gone"
+                            android:id="@+id/edtMonthly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtMonthly"
+                            app:layout_constraintStart_toEndOf="@+id/txtMonthly"
+                            app:layout_constraintTop_toTopOf="@+id/txtMonthly" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/txtMonthly2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="month"
+                            app:layout_constraintBottom_toBottomOf="@+id/edtMonthly"
+                            app:layout_constraintStart_toEndOf="@+id/edtMonthly"
+                            app:layout_constraintTop_toTopOf="@+id/edtMonthly" />
+
+
+                        <LinearLayout
+                            android:id="@+id/ContainerOptionsOfMonth"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_margin="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rbMonthly">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnRepeatOnTheDay"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/buttons_default"
+                                android:paddingStart="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingEnd="16dp"
+                                android:paddingBottom="8dp">
+
+                                <TextView
+                                    android:id="@+id/RepeatOnTheDay"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Repeat on the 23rd day."
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnRepeatOnTheDayOfTheWeek"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/buttons_default"
+                                android:paddingStart="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingEnd="16dp"
+                                android:paddingBottom="8dp">
+
+                                <TextView
+                                    android:id="@+id/RepeatOnTheDayOfTheWeek"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="repeat on Friday."
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnSelectDateToRepeat"
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/buttons_default"
+                                android:paddingStart="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingEnd="16dp"
+                                android:paddingBottom="8dp">
+
+                                <TextView
+                                    android:id="@+id/txtSelectDateToRepeat"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Select date to repeat."
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ContainerDaysOfMonth"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/ContainerOptionsOfMonth"
+                            app:layout_constraintStart_toStartOf="@+id/ContainerOptionsOfMonth"
+                            app:layout_constraintTop_toBottomOf="@+id/ContainerOptionsOfMonth">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/day1"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="1" />
+
+                                <TextView
+                                    android:id="@+id/day2"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="2" />
+
+                                <TextView
+                                    android:id="@+id/day3"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="3" />
+
+                                <TextView
+                                    android:id="@+id/day4"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="4" />
+
+                                <TextView
+                                    android:id="@+id/day5"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="5" />
+
+                                <TextView
+                                    android:id="@+id/day6"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="6" />
+
+                                <TextView
+                                    android:id="@+id/day7"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="7" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/day8"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="8" />
+
+                                <TextView
+                                    android:id="@+id/day9"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="9" />
+
+                                <TextView
+                                    android:id="@+id/day10"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="10" />
+
+                                <TextView
+                                    android:id="@+id/day11"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="11" />
+
+                                <TextView
+                                    android:id="@+id/day12"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="12" />
+
+                                <TextView
+                                    android:id="@+id/day13"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="13" />
+
+                                <TextView
+                                    android:id="@+id/day14"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="14" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/day15"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="15" />
+
+                                <TextView
+                                    android:id="@+id/day16"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="16" />
+
+                                <TextView
+                                    android:id="@+id/day17"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="17" />
+
+                                <TextView
+                                    android:id="@+id/day18"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="18" />
+
+                                <TextView
+                                    android:id="@+id/day19"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="19" />
+
+                                <TextView
+                                    android:id="@+id/day20"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="20" />
+
+                                <TextView
+                                    android:id="@+id/day21"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="21" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/day22"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="22" />
+
+                                <TextView
+                                    android:id="@+id/day23"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="23" />
+
+                                <TextView
+                                    android:id="@+id/day24"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="24" />
+
+                                <TextView
+                                    android:id="@+id/day25"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="25" />
+
+                                <TextView
+                                    android:id="@+id/day26"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="26" />
+
+                                <TextView
+                                    android:id="@+id/day27"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="27" />
+
+                                <TextView
+                                    android:id="@+id/day28"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="28" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/day29"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="29" />
+
+                                <TextView
+                                    android:id="@+id/day30"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="30" />
+
+                                <TextView
+                                    android:id="@+id/day31"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="31" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/viewMonthly"
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbMonthly"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/containerYearly"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbYearly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/txtYearly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yearly"
+                            app:layout_constraintBottom_toBottomOf="@+id/rbYearly"
+                            app:layout_constraintStart_toEndOf="@+id/rbYearly"
+                            app:layout_constraintTop_toTopOf="@+id/rbYearly" />
+
+                        <EditText
+                            android:visibility="gone"
+                            android:id="@+id/edtYearly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtYearly"
+                            app:layout_constraintStart_toEndOf="@+id/txtYearly"
+                            app:layout_constraintTop_toTopOf="@+id/txtYearly" />
+
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/txtYearly2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="year"
+                            app:layout_constraintBottom_toBottomOf="@+id/edtYearly"
+                            app:layout_constraintStart_toEndOf="@+id/edtYearly"
+                            app:layout_constraintTop_toTopOf="@+id/edtYearly" />
+
+                        <LinearLayout
+                            android:id="@+id/ContainerOptionsOfYear"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rbYearly">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnRepeatOnMonthDay"
+                                android:layout_width="280dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/buttons_default"
+                                android:paddingStart="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingEnd="16dp"
+                                android:paddingBottom="8dp">
+
+                                <TextView
+                                    android:id="@+id/txtRepeatOnMonthDay"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="repeat on January 23"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnRepeatOnTheDayOfTheWeekOfTheMonth"
+                                android:layout_width="280dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/buttons_default"
+                                android:paddingStart="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingEnd="16dp"
+                                android:paddingBottom="8dp">
+
+                                <TextView
+                                    android:id="@+id/txtRepeatOnTheDayOfTheWeekOfTheMonth"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="repeat on the 4th Friday of January."
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/btnSelectTheMonth"
+                                android:layout_width="280dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:background="@drawable/buttons_default"
+                                android:paddingStart="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingEnd="16dp"
+                                android:paddingBottom="8dp">
+
+                                <TextView
+                                    android:id="@+id/txtSelectTheMonth"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Select the month to repeat on the day."
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ContainerMonths"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/ContainerOptionsOfYear"
+                            app:layout_constraintStart_toStartOf="@+id/ContainerOptionsOfYear"
+                            app:layout_constraintTop_toBottomOf="@+id/ContainerOptionsOfYear">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/month1"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Jan." />
+
+                                <TextView
+                                    android:id="@+id/month2"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Feb." />
+
+                                <TextView
+                                    android:id="@+id/month3"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Mar." />
+
+                                <TextView
+                                    android:id="@+id/month4"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Apr." />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/month5"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="May." />
+
+                                <TextView
+                                    android:id="@+id/month6"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Jun." />
+
+                                <TextView
+                                    android:id="@+id/month7"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Jul." />
+
+                                <TextView
+                                    android:id="@+id/month8"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Aug." />
+
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/month9"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Sep." />
+
+                                <TextView
+                                    android:id="@+id/month10"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Ouc." />
+
+                                <TextView
+                                    android:id="@+id/month11"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Nov." />
+
+                                <TextView
+                                    android:id="@+id/month12"
+                                    android:layout_width="45dp"
+                                    android:layout_height="45dp"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/buttons_default"
+                                    android:gravity="center"
+                                    android:text="Dez." />
+
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="2dp"
+                            android:background="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbYearly" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/txtDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="Duration"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/durationContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDuration">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbAlways"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Always"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbAlways"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbSpecificNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Specific number of times"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbSpecificNumber"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/rbUntil"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Until"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbUntil"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

@@ -53,7 +53,7 @@ class AddTaskFragment : Fragment() {
     ): View {
         binding = FragmentAddTaskBinding.inflate(inflater, container, false)
 
-        binding.edtDate.setOnClickListener { setupDatePicker() }
+        setupDatePicker()
 
         binding.LayoutUrgent.setOnClickListener {
             setPriority(binding.LayoutUrgent)
@@ -75,21 +75,15 @@ class AddTaskFragment : Fragment() {
             task.enumPriority = EnumPriority.LOW
         }
 
-        binding.repeatCheckBox.setOnCheckedChangeListener { _, isChecked ->
+        binding.cbNotification.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                binding.repeatContainer.visibility = View.VISIBLE
+                binding.layoutHour.visibility = View.VISIBLE
+                binding.notificationContainer.visibility = View.VISIBLE
             } else {
-                binding.repeatContainer.visibility = View.GONE
+                binding.layoutHour.visibility = View.GONE
+                binding.notificationContainer.visibility = View.GONE
             }
         }
-
-        binding.sundayLayout.setOnClickListener { setSchedule(binding.sundayLayout) }
-        binding.LayoutMonday.setOnClickListener { setSchedule(binding.LayoutMonday) }
-        binding.LayoutTue.setOnClickListener { setSchedule(binding.LayoutTue) }
-        binding.LayoutWednesday.setOnClickListener { setSchedule(binding.LayoutWednesday) }
-        binding.LayoutThursday.setOnClickListener { setSchedule(binding.LayoutThursday) }
-        binding.LayoutFriday.setOnClickListener { setSchedule(binding.LayoutFriday) }
-        binding.LayoutSaturday.setOnClickListener { setSchedule(binding.LayoutSaturday) }
 
         binding.LayoutSimple.setOnClickListener { setNotification(binding.LayoutSimple) }
         binding.LayoutSchedule.setOnClickListener { setNotification(binding.LayoutSchedule) }
@@ -129,7 +123,7 @@ class AddTaskFragment : Fragment() {
             binding.edtTile.setText(task.title)
             binding.edtDescription.setText(task.description)
             selectedDate = LocalDate.ofEpochDay(task.date)
-            binding.edtDate.setText(converter.getLocalData(task.date))
+            binding.txtDate.setText(converter.getLocalData(task.date))
             when (task.enumPriority) {
                 EnumPriority.URGENT -> setPriority(binding.LayoutUrgent)
                 EnumPriority.HIGH -> setPriority(binding.LayoutPriorityHigh)
@@ -144,20 +138,7 @@ class AddTaskFragment : Fragment() {
             }
 
             if (!task.repeat.getList().isEmpty()) {
-                binding.repeatCheckBox.isChecked = true
-                binding.repeatContainer.visibility = View.VISIBLE
 
-                task.repeat.getList().forEach {
-                    when (it) {
-                        EnumSchedule.Sunday.value -> editSchedule(binding.sundayLayout)
-                        EnumSchedule.Monday.value -> editSchedule(binding.LayoutMonday)
-                        EnumSchedule.Tuesday.value -> editSchedule(binding.LayoutTue)
-                        EnumSchedule.Wednesday.value -> editSchedule(binding.LayoutWednesday)
-                        EnumSchedule.Thursday.value -> editSchedule(binding.LayoutThursday)
-                        EnumSchedule.Friday.value -> editSchedule(binding.LayoutFriday)
-                        EnumSchedule.Saturday.value -> editSchedule(binding.LayoutSaturday)
-                    }
-                }
             }
 
             edit = true
@@ -173,7 +154,7 @@ class AddTaskFragment : Fragment() {
             val dataFormatada = converter.getLocalData(selectedDateFronTasks)
 
 
-            binding.edtDate.setText(dataFormatada)
+            binding.txtDate.setText(dataFormatada)
             edit = false
         }
     }
@@ -209,134 +190,6 @@ class AddTaskFragment : Fragment() {
         binding.LayoutPriorityMedium.setBackgroundResource(R.drawable.priority_default)
         binding.LayoutPriorityLow.setBackgroundResource(R.drawable.priority_default)
     }
-
-    private fun setSchedule(view: ConstraintLayout) {
-        when (view.id) {
-            binding.sundayLayout.id -> {
-                if (!task.repeat.getList().contains(EnumSchedule.Sunday.value)) {
-                    task.repeat.addSchedule(EnumSchedule.Sunday)
-                    binding.sundayLayout.setBackgroundResource(R.drawable.schedule_selected)
-                    binding.tvSun.setTextColor(Color.WHITE)
-                } else {
-                    task.repeat.removeSchedule(EnumSchedule.Sunday)
-                    binding.sundayLayout.setBackgroundResource(R.drawable.schedule_default)
-                    binding.tvSun.setTextColor(Color.GRAY)
-                }
-            }
-
-            binding.LayoutMonday.id -> {
-                if (!task.repeat.getList().contains(EnumSchedule.Monday.value)) {
-                    task.repeat.addSchedule(EnumSchedule.Monday)
-                    binding.LayoutMonday.setBackgroundResource(R.drawable.schedule_selected)
-                    binding.tvMon.setTextColor(Color.WHITE)
-                } else {
-                    task.repeat.removeSchedule(EnumSchedule.Monday)
-                    binding.LayoutMonday.setBackgroundResource(R.drawable.schedule_default)
-                    binding.tvMon.setTextColor(Color.GRAY)
-                }
-            }
-
-            binding.LayoutTue.id -> {
-                if (!task.repeat.getList().contains(EnumSchedule.Tuesday.value)) {
-                    task.repeat.addSchedule(EnumSchedule.Tuesday)
-                    binding.LayoutTue.setBackgroundResource(R.drawable.schedule_selected)
-                    binding.tvTue.setTextColor(Color.WHITE)
-                } else {
-                    task.repeat.removeSchedule(EnumSchedule.Tuesday)
-                    binding.LayoutTue.setBackgroundResource(R.drawable.schedule_default)
-                    binding.tvTue.setTextColor(Color.GRAY)
-                }
-            }
-
-            binding.LayoutWednesday.id -> {
-                if (!task.repeat.getList().contains(EnumSchedule.Wednesday.value)) {
-                    task.repeat.addSchedule(EnumSchedule.Wednesday)
-                    binding.LayoutWednesday.setBackgroundResource(R.drawable.schedule_selected)
-                    binding.tvWed.setTextColor(Color.WHITE)
-                } else {
-                    task.repeat.removeSchedule(EnumSchedule.Wednesday)
-                    binding.LayoutWednesday.setBackgroundResource(R.drawable.schedule_default)
-                    binding.tvWed.setTextColor(Color.GRAY)
-                }
-            }
-
-            binding.LayoutThursday.id -> {
-                if (!task.repeat.getList().contains(EnumSchedule.Thursday.value)) {
-                    task.repeat.addSchedule(EnumSchedule.Thursday)
-                    binding.LayoutThursday.setBackgroundResource(R.drawable.schedule_selected)
-                    binding.tvThu.setTextColor(Color.WHITE)
-                } else {
-                    task.repeat.removeSchedule(EnumSchedule.Thursday)
-                    binding.LayoutThursday.setBackgroundResource(R.drawable.schedule_default)
-                    binding.tvThu.setTextColor(Color.GRAY)
-                }
-            }
-
-            binding.LayoutFriday.id -> {
-                if (!task.repeat.getList().contains(EnumSchedule.Friday.value)) {
-                    task.repeat.addSchedule(EnumSchedule.Friday)
-                    binding.LayoutFriday.setBackgroundResource(R.drawable.schedule_selected)
-                    binding.tvFri.setTextColor(Color.WHITE)
-                } else {
-                    task.repeat.removeSchedule(EnumSchedule.Friday)
-                    binding.LayoutFriday.setBackgroundResource(R.drawable.schedule_default)
-                    binding.tvFri.setTextColor(Color.GRAY)
-                }
-            }
-
-            binding.LayoutSaturday.id -> {
-                if (!task.repeat.getList().contains(EnumSchedule.Saturday.value)) {
-                    task.repeat.addSchedule(EnumSchedule.Saturday)
-                    binding.LayoutSaturday.setBackgroundResource(R.drawable.schedule_selected)
-                    binding.tvSat.setTextColor(Color.WHITE)
-                } else {
-                    task.repeat.removeSchedule(EnumSchedule.Saturday)
-                    binding.LayoutSaturday.setBackgroundResource(R.drawable.schedule_default)
-                    binding.tvSat.setTextColor(Color.GRAY)
-                }
-            }
-        }
-    }
-
-    private fun editSchedule(view: ConstraintLayout) {
-        when (view.id) {
-            binding.sundayLayout.id -> {
-                binding.sundayLayout.setBackgroundResource(R.drawable.schedule_selected)
-                binding.tvSun.setTextColor(Color.WHITE)
-            }
-
-            binding.LayoutMonday.id -> {
-                binding.LayoutMonday.setBackgroundResource(R.drawable.schedule_selected)
-                binding.tvMon.setTextColor(Color.WHITE)
-            }
-
-            binding.LayoutTue.id -> {
-                binding.LayoutTue.setBackgroundResource(R.drawable.schedule_selected)
-                binding.tvTue.setTextColor(Color.WHITE)
-            }
-
-            binding.LayoutWednesday.id -> {
-                binding.LayoutWednesday.setBackgroundResource(R.drawable.schedule_selected)
-                binding.tvWed.setTextColor(Color.WHITE)
-            }
-
-            binding.LayoutThursday.id -> {
-                binding.LayoutThursday.setBackgroundResource(R.drawable.schedule_selected)
-                binding.tvThu.setTextColor(Color.WHITE)
-            }
-
-            binding.LayoutFriday.id -> {
-                binding.LayoutFriday.setBackgroundResource(R.drawable.schedule_selected)
-                binding.tvFri.setTextColor(Color.WHITE)
-            }
-
-            binding.LayoutSaturday.id -> {
-                binding.LayoutSaturday.setBackgroundResource(R.drawable.schedule_selected)
-                binding.tvSat.setTextColor(Color.WHITE)
-            }
-        }
-    }
-
 
     private fun resetLayoutNotification() {
         binding.LayoutSimple.setBackgroundResource(R.drawable.priority_default)
@@ -406,7 +259,7 @@ class AddTaskFragment : Fragment() {
                         .ofLocalizedDate(FormatStyle.SHORT)
                         .withLocale(Locale.getDefault())
 
-                    binding.edtDate.setText(localDate.format(formatter))
+                    binding.txtDate.setText(localDate.format(formatter))
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -414,7 +267,6 @@ class AddTaskFragment : Fragment() {
             ).show()
         }
 
-        binding.edtDate.setOnClickListener { openDatePicker() }
         binding.layoutDate.setOnClickListener { openDatePicker() }
     }
 }
