@@ -88,6 +88,8 @@ class AddTaskFragment : Fragment() {
         binding.LayoutSimple.setOnClickListener { setNotification(binding.LayoutSimple) }
         binding.LayoutSchedule.setOnClickListener { setNotification(binding.LayoutSchedule) }
         binding.LayoutNotificationFullScreen.setOnClickListener { setNotification(binding.LayoutNotificationFullScreen) }
+        binding.layoutRepeat.setOnClickListener { Navigate.navigateFragment(requireActivity(),
+            RepeatFragment()) }
 
 
         binding.btnSave.setOnClickListener {

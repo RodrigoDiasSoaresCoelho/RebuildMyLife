@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -26,9 +26,9 @@
             android:layout_marginStart="16dp"
             android:text="Repeat"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
+            app:layout_constraintBottom_toBottomOf="@+id/imgBack"
+            app:layout_constraintStart_toEndOf="@+id/imgBack"
+            app:layout_constraintTop_toTopOf="@+id/imgBack" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
+            app:layout_constraintTop_toBottomOf="@+id/imgBack">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -154,13 +154,34 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:id="@+id/txtWeekly"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Weekly"
                             app:layout_constraintBottom_toBottomOf="@+id/rbWeekly"
-                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/rbWeekly"
                             app:layout_constraintTop_toTopOf="@+id/rbWeekly" />
+
+                        <EditText
+                            android:visibility="gone"
+                            android:id="@+id/edtWeekly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtWeekly"
+                            app:layout_constraintStart_toEndOf="@+id/txtWeekly"
+                            app:layout_constraintTop_toTopOf="@+id/txtWeekly" />
+
+                        <TextView
+                            android:visibility="gone"
+                            android:id="@+id/txtWeekly2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:text="day"
+                            app:layout_constraintBottom_toBottomOf="@+id/txtWeekly"
+                            app:layout_constraintStart_toEndOf="@+id/edtWeekly"
+                            app:layout_constraintTop_toTopOf="@+id/txtWeekly" />
 
                         <LinearLayout
                             android:id="@+id/repeatContainer"
@@ -168,13 +189,15 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:visibility="gone"
+                            android:layout_marginBottom="16dp"
+                            app:layout_constraintBottom_toTopOf="@+id/viewWeekly"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/rbWeekly"
+                            app:layout_constraintStart_toEndOf="@+id/rbWeekly"
                             app:layout_constraintTop_toBottomOf="@+id/rbWeekly">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/sundayLayout"
-                                android:layout_width="40dp"
+                                android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_margin="4dp"
                                 android:layout_weight="1"
@@ -189,7 +212,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/sunday"
                                     android:textColor="@color/grey"
-                                    android:textSize="12sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -201,7 +224,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/LayoutMonday"
-                                android:layout_width="40dp"
+                                android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_margin="4dp"
                                 android:layout_weight="1"
@@ -218,7 +241,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/monday"
                                     android:textColor="@color/grey"
-                                    android:textSize="12sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -230,7 +253,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/LayoutTue"
-                                android:layout_width="40dp"
+                                android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_margin="4dp"
                                 android:layout_weight="1"
@@ -247,7 +270,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/tuesday"
                                     android:textColor="@color/grey"
-                                    android:textSize="12sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -259,7 +282,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/LayoutWednesday"
-                                android:layout_width="40dp"
+                                android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_margin="4dp"
                                 android:layout_weight="1"
@@ -275,7 +298,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/wed"
                                     android:textColor="@color/grey"
-                                    android:textSize="12sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -287,7 +310,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/LayoutThursday"
-                                android:layout_width="40dp"
+                                android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_margin="4dp"
                                 android:layout_weight="1"
@@ -303,7 +326,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/thu"
                                     android:textColor="@color/grey"
-                                    android:textSize="12sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -315,7 +338,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/LayoutFriday"
-                                android:layout_width="40dp"
+                                android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_margin="4dp"
                                 android:layout_weight="1"
@@ -330,7 +353,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/friday"
                                     android:textColor="@color/grey"
-                                    android:textSize="12sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -342,7 +365,7 @@
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/LayoutSaturday"
-                                android:layout_width="40dp"
+                                android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:layout_margin="4dp"
                                 android:layout_weight="1"
@@ -357,7 +380,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/Saturday"
                                     android:textColor="@color/grey"
-                                    android:textSize="12sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
@@ -369,6 +392,7 @@
                         </LinearLayout>
 
                         <View
+                            android:id="@+id/viewWeekly"
                             android:layout_width="0dp"
                             android:layout_height="2dp"
                             android:background="@color/grey"
@@ -421,15 +445,18 @@
 
                         <LinearLayout
                             android:id="@+id/ContainerOptionsOfMonth"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:visibility="gone"
-                            android:layout_margin="16dp"
+                            app:layout_constraintBottom_toTopOf="@+id/viewMonthly"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/rbMonthly">
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/rbMonthly"
+                            app:layout_constraintTop_toBottomOf="@+id/rbMonthly"
+                            app:layout_constraintVertical_bias="0.0">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/btnRepeatOnTheDay"
@@ -503,7 +530,7 @@
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
                             android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/viewMonthly"
                             app:layout_constraintEnd_toEndOf="@+id/ContainerOptionsOfMonth"
                             app:layout_constraintStart_toStartOf="@+id/ContainerOptionsOfMonth"
                             app:layout_constraintTop_toBottomOf="@+id/ContainerOptionsOfMonth">
@@ -856,34 +883,38 @@
                             app:layout_constraintTop_toTopOf="@+id/rbYearly" />
 
                         <EditText
-                            android:visibility="gone"
                             android:id="@+id/edtYearly"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@+id/txtYearly"
                             app:layout_constraintStart_toEndOf="@+id/txtYearly"
                             app:layout_constraintTop_toTopOf="@+id/txtYearly" />
 
 
                         <TextView
-                            android:visibility="gone"
                             android:id="@+id/txtYearly2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="year"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@+id/edtYearly"
                             app:layout_constraintStart_toEndOf="@+id/edtYearly"
                             app:layout_constraintTop_toTopOf="@+id/edtYearly" />
 
                         <LinearLayout
                             android:id="@+id/ContainerOptionsOfYear"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:visibility="gone"
+                            app:layout_constraintVertical_bias="0"
+                            app:layout_constraintBottom_toTopOf="@+id/viewYearly"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/rbYearly"
                             app:layout_constraintTop_toBottomOf="@+id/rbYearly">
 
                             <androidx.constraintlayout.widget.ConstraintLayout
@@ -923,6 +954,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="repeat on the 4th Friday of January."
                                     app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintHorizontal_bias="0.518"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -952,15 +984,15 @@
 
                         <LinearLayout
                             android:id="@+id/ContainerMonths"
-                            android:visibility="gone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="16dp"
                             android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/ContainerOptionsOfYear"
-                            app:layout_constraintStart_toStartOf="@+id/ContainerOptionsOfYear"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toTopOf="@+id/viewYearly"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/rbYearly"
                             app:layout_constraintTop_toBottomOf="@+id/ContainerOptionsOfYear">
 
                             <LinearLayout
@@ -1048,7 +1080,6 @@
                                     android:text="Aug." />
 
 
-
                             </LinearLayout>
 
                             <LinearLayout
@@ -1093,12 +1124,12 @@
                                     android:text="Dez." />
 
 
-
                             </LinearLayout>
 
                         </LinearLayout>
 
                         <View
+                            android:id="@+id/viewYearly"
                             android:layout_width="0dp"
                             android:layout_height="2dp"
                             android:background="@color/grey"
@@ -1106,7 +1137,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/rbYearly" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
                 </LinearLayout>
