@@ -3,6 +3,6 @@
 
     <corners android:radius="10dp"/>
 
-    <solid android:color="@color/Select_day"/>
+    <solid android:color="@color/primary_color"/>
 
 </shape>

@@ -22,6 +22,7 @@ import br.com.jesusc.rebuildmylife.util.CallbackTask
 import br.com.jesusc.rebuildmylife.util.Navigate
 import br.com.jesusc.rebuildmylife.viewModel.TaskViewModel
 import br.com.jesusc.rebuildmylife.viewModel.TaskViewModelFactory
+import java.time.LocalDate
 import java.time.YearMonth
 import kotlin.collections.mutableListOf
 
@@ -53,9 +54,6 @@ class TasksFragment : Fragment(), CallbackDate {
 
         binding = FragmentTasksBinding.inflate(inflater, container, false)
 
-        // -----------------------------
-        // Recycler de TASKS
-        // -----------------------------
         binding.recyclerTasks.layoutManager = LinearLayoutManager(requireContext())
 
         dbHelper = DbHelper.getInstance(requireContext())
@@ -88,9 +86,6 @@ class TasksFragment : Fragment(), CallbackDate {
             )
         }
 
-        // -----------------------------
-        // Recycler de DIAS (NÃO ALTERADO)
-        // -----------------------------
         adapter = DateAdapter(dateManager.getDatesForUi(), this)
 
         binding.recyclerDay.layoutManager = LinearLayoutManager(
@@ -134,9 +129,6 @@ class TasksFragment : Fragment(), CallbackDate {
         return binding.root
     }
 
-    // --------------------------------
-    // CALLBACK DAS TASKS
-    // --------------------------------
     private fun setCallback(): CallbackTask {
         return object : CallbackTask {
 
@@ -176,9 +168,6 @@ class TasksFragment : Fragment(), CallbackDate {
         }
     }
 
-    // --------------------------------
-    // CALLBACK DO RECYCLER DE DIAS
-    // --------------------------------
     override fun dateSelected(uiDate: UiDate) {
         this.uiDate = uiDate
 
@@ -192,19 +181,21 @@ class TasksFragment : Fragment(), CallbackDate {
 
         taskViewModel.loadTasks(uiDate)
 
-        binding.txtToday.visibility = View.VISIBLE
+        val today = LocalDate.now()
+
+        if(uiDate.date != today.toEpochDay()) {
+            binding.txtToday.visibility = View.VISIBLE
+        }else{
+            binding.txtToday.visibility = View.GONE
+        }
     }
 
-    // --------------------------------
-    // BOTÃO "HOJE"
-    // --------------------------------
     private fun today() {
         dateManager.goToToday()
 
         adapter.submitList(dateManager.getDatesForUi())
 
         uiDate = adapter.selectTodayIfExists()
-            ?: dateManager.getSelectedDate()!!
 
         binding.txtMonthAndYear.text = dateManager.getCurrentMonthLabel()
 
@@ -224,9 +215,6 @@ class TasksFragment : Fragment(), CallbackDate {
         binding.txtToday.visibility = View.GONE
     }
 
-    // --------------------------------
-    // ATUALIZA MÊS / ANO
-    // --------------------------------
     private fun updateMonthAndDays(yearMonth: YearMonth) {
         dateManager.setYearMonth(yearMonth)
 

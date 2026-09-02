@@ -55,6 +55,10 @@ class AddTaskFragment : Fragment() {
 
         setupDatePicker()
 
+        binding.imgBack.setOnClickListener {
+            Navigate.navigateBack(requireActivity())
+        }
+
         binding.LayoutUrgent.setOnClickListener {
             setPriority(binding.LayoutUrgent)
             task.enumPriority = EnumPriority.URGENT

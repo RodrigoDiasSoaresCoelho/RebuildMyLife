@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_app"
     tools:context=".fragment.TasksFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,8 +13,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fragmentContainerToolBar"
@@ -70,7 +68,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_margin="16dp"
-                android:src="@drawable/ic_calendar"
+                android:src="@drawable/calendar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="?attr/card_color"
             android:contentDescription="TODO"
             android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="parent"

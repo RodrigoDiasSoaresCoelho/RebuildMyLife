@@ -1,5 +1,8 @@
 package br.com.jesusc.rebuildmylife.activity
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.com.jesusc.rebuildmylife.R
 import br.com.jesusc.rebuildmylife.adapter.DateAdapter
+import br.com.jesusc.rebuildmylife.alarm.AlarmPermissionHelper
 import br.com.jesusc.rebuildmylife.databinding.ActivityMainBinding
 import br.com.jesusc.rebuildmylife.fragment.AddTaskFragment
+import br.com.jesusc.rebuildmylife.fragment.SplashFragment
 import br.com.jesusc.rebuildmylife.fragment.TasksFragment
 import br.com.jesusc.rebuildmylife.menager.DateUiManager
 import br.com.jesusc.rebuildmylife.model.UiDate
@@ -32,6 +37,35 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        Navigate.navigateFragment(this, TasksFragment.getInstance())
+        Navigate.navigateFragment(this, SplashFragment())
+    }
+
+    private fun requestAlarmPermissions() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.POST_NOTIFICATIONS
+                    ),
+                    REQUEST_NOTIFICATION
+                )
+            }
+        }
+
+        if (
+            !AlarmPermissionHelper
+                .canScheduleExactAlarms(this)
+        ) {
+
+            AlarmPermissionHelper
+                .openExactAlarmSettings(this)
+        }
+    }
+
+    companion object {
+
+        private const val REQUEST_NOTIFICATION = 1001
     }
 }

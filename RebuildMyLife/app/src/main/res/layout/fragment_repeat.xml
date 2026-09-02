@@ -43,7 +43,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
@@ -81,7 +80,7 @@
                         <View
                             android:layout_width="0dp"
                             android:layout_height="2dp"
-                            android:background="@color/grey"
+                            android:background="?attr/text_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/rbNever" />
@@ -134,7 +133,7 @@
                         <View
                             android:layout_width="0dp"
                             android:layout_height="2dp"
-                            android:background="@color/grey"
+                            android:background="?attr/text_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/rbDaily" />
@@ -188,7 +187,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:layout_marginBottom="16dp"
                             app:layout_constraintBottom_toTopOf="@+id/viewWeekly"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -211,7 +210,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/sunday"
-                                    android:textColor="@color/grey"
+                                    android:textColor="?attr/text_color"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -240,7 +239,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/monday"
-                                    android:textColor="@color/grey"
+                                    android:textColor="?attr/text_color"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -269,7 +268,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/tuesday"
-                                    android:textColor="@color/grey"
+                                    android:textColor="?attr/text_color"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -297,7 +296,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/wed"
-                                    android:textColor="@color/grey"
+                                    android:textColor="?attr/text_color"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -325,7 +324,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/thu"
-                                    android:textColor="@color/grey"
+                                    android:textColor="?attr/text_color"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -352,7 +351,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/friday"
-                                    android:textColor="@color/grey"
+                                    android:textColor="?attr/text_color"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -379,7 +378,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/Saturday"
-                                    android:textColor="@color/grey"
+                                    android:textColor="?attr/text_color"
                                     android:textSize="15sp"
                                     android:textStyle="bold"
                                     app:layout_constraintBottom_toBottomOf="parent"
@@ -395,7 +394,7 @@
                             android:id="@+id/viewWeekly"
                             android:layout_width="0dp"
                             android:layout_height="2dp"
-                            android:background="@color/grey"
+                            android:background="?attr/text_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/rbWeekly" />
@@ -473,6 +472,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Repeat on the 23rd day."
+                                    android:textColor="?attr/text_color"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -494,6 +494,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="repeat on Friday."
+                                    android:textColor="?attr/text_color"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -515,6 +516,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Select date to repeat."
+                                    android:textColor="?attr/text_color"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -854,7 +856,7 @@
                             android:id="@+id/viewMonthly"
                             android:layout_width="0dp"
                             android:layout_height="2dp"
-                            android:background="@color/grey"
+                            android:background="?attr/text_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/rbMonthly"/>
@@ -932,6 +934,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="repeat on January 23"
+                                    android:textColor="?attr/text_color"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -953,6 +956,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="repeat on the 4th Friday of January."
+                                    android:textColor="?attr/text_color"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintHorizontal_bias="0.518"
                                     app:layout_constraintStart_toStartOf="parent"
@@ -975,6 +979,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Select the month to repeat on the day."
+                                    android:textColor="?attr/text_color"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -1132,7 +1137,7 @@
                             android:id="@+id/viewYearly"
                             android:layout_width="0dp"
                             android:layout_height="2dp"
-                            android:background="@color/grey"
+                            android:background="?attr/text_color"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/rbYearly" />

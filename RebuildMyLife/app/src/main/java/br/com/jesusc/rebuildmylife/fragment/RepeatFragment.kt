@@ -2,6 +2,7 @@ package br.com.jesusc.rebuildmylife.fragment
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,19 +15,12 @@ import br.com.jesusc.rebuildmylife.R
 import br.com.jesusc.rebuildmylife.databinding.FragmentRepeatBinding
 import br.com.jesusc.rebuildmylife.enums.EnumSchedule
 import br.com.jesusc.rebuildmylife.model.Task
+import br.com.jesusc.rebuildmylife.util.Navigate
 
 class RepeatFragment : Fragment() {
     private lateinit var binding: FragmentRepeatBinding
-    private lateinit var task: Task
+    private var task: Task
     private var edit = false
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +30,7 @@ class RepeatFragment : Fragment() {
 
 
         binding.imgBack.setOnClickListener {
-
+            Navigate.navigateBack(requireActivity())
         }
 
         binding.rbNever.setOnClickListener { v ->
@@ -110,17 +104,22 @@ class RepeatFragment : Fragment() {
             binding.ContainerMonths.visibility = VISIBLE
         }
 
+        binding.rbAlways.setOnClickListener {
+            setUnselectedDuration()
+            binding.rbAlways.isChecked = true
+        }
+
+        binding.rbSpecificNumber.setOnClickListener {
+            setUnselectedDuration()
+            binding.rbSpecificNumber.isChecked = true
+        }
+
+        binding.rbUntil.setOnClickListener {
+            setUnselectedDuration()
+            binding.rbUntil.isChecked = true
+        }
+
         return binding.root
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            RepeatFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
     }
 
     init {
@@ -137,16 +136,9 @@ class RepeatFragment : Fragment() {
             edit = true
         } catch (e: Exception) {
             e.printStackTrace()
-//            var selectedDateFronTasks = requireArguments().getLong("selectedDate")
-//            this.selectedDate = LocalDate.ofEpochDay(selectedDateFronTasks)
 
             task = Task()
 
-
-//            val dataFormatada = converter.getLocalData(selectedDateFronTasks)
-//
-//
-//            binding.txtDate.setText(dataFormatada)
             edit = false
         }
     }
@@ -340,11 +332,25 @@ class RepeatFragment : Fragment() {
 
     private fun setBtnDefault(btn: ConstraintLayout, txt: TextView) {
         btn.setBackgroundResource(R.drawable.buttons_default)
-        txt.setTextColor(Color.BLACK)
+
+        val typedValue = TypedValue()
+        txt.context.theme.resolveAttribute(
+            R.attr.text_color,
+            typedValue,
+            true
+        )
+
+        txt.setTextColor(typedValue.data)
     }
 
     private fun setBtnSelected(btn: ConstraintLayout, txt: TextView) {
         btn.setBackgroundResource(R.drawable.button_selected)
         txt.setTextColor(Color.WHITE)
+    }
+
+    private fun setUnselectedDuration() {
+        binding.rbAlways.isChecked = false
+        binding.rbSpecificNumber.isChecked = false
+        binding.rbUntil.isChecked = false
     }
 }

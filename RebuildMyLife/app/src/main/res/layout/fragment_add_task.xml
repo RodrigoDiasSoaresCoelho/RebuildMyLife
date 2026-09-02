@@ -5,13 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="4dp"
-    android:background="@color/white"
     tools:context=".fragment.AddTaskFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -25,6 +23,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/imgBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/ic_back"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Add Task"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgBack"
+                    app:layout_constraintStart_toEndOf="@+id/imgBack"
+                    app:layout_constraintTop_toTopOf="@+id/imgBack" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutRepeat"
@@ -65,9 +82,7 @@
                         app:layout_constraintStart_toEndOf="@+id/imgRepeat"
                         app:layout_constraintTop_toTopOf="@+id/imgRepeat" />
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutNotification"
@@ -153,10 +168,7 @@
                             app:layout_constraintStart_toEndOf="@+id/imgHour"
                             app:layout_constraintTop_toTopOf="@+id/imgHour" />
 
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
                     <LinearLayout
                         android:id="@+id/notificationContainer"
@@ -216,13 +228,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/schedule"
-                                android:textColor="@color/grey"
+                                android:textColor="?attr/text_color"
                                 android:textSize="15sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
-
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -242,7 +253,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/fullscreen"
-                                android:textColor="@color/grey"
+                                android:textColor="?attr/text_color"
                                 android:textSize="15sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -250,12 +261,8 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
                     </LinearLayout>
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutPriority"
@@ -290,7 +297,6 @@
                         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
                         app:layout_constraintStart_toEndOf="@+id/imageView2"
                         app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
 
                     <LinearLayout
                         android:id="@+id/priorityContainer"
@@ -341,7 +347,6 @@
                                 app:layout_constraintTop_toBottomOf="@+id/tvUrgent"
                                 app:layout_constraintVertical_bias="0.3" />
 
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -374,8 +379,6 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tvHigh"
                                 app:layout_constraintVertical_bias="0.3" />
-
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -409,10 +412,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tvMedium"
                                 app:layout_constraintVertical_bias="0.3" />
-
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/LayoutPriorityLow"
@@ -446,29 +446,27 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tvLow"
                                 app:layout_constraintVertical_bias="0.3" />
-
-
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layoutTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="20dp"
                     android:hint="@string/title"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
                     app:endIconMode="clear_text"
                     app:helperTextTextColor="@color/red"
-                    android:elevation="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
                     app:startIconDrawable="@drawable/ic_title">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -544,13 +542,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imgCalendar"
                         app:layout_constraintTop_toTopOf="@+id/imgCalendar" />
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 
@@ -560,11 +552,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/save"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:backgroundTint="@color/LOW"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
 
         <Button
             android:id="@+id/btnCancel"
@@ -572,12 +564,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/cancel"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:backgroundTint="@color/HIGH"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnSave" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </FrameLayout>

@@ -12,19 +12,31 @@ object Navigate {
         val fragmentManager = activity.supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment)
-        transaction.commitNow()
+            .addToBackStack(null)
+            .commit()
     }
 
     fun navigateFragment(activity: FragmentActivity, fragment: Fragment, bundle: Bundle) {
         val fragmentManager = activity.supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(R.id.fragmentContainer, fragment.javaClass, bundle,null)
-        transaction.commitNow()
+            .addToBackStack(null)
+            .commit()
     }
 
     fun navigateToActivity(context: Context, c: Class<*>?) {
         val intent = Intent(context, c)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+    }
+
+    fun navigateBack(activity: FragmentActivity) {
+        val fragmentManager = activity.supportFragmentManager
+
+        if (fragmentManager.backStackEntryCount > 0) {
+            fragmentManager.popBackStack()
+        } else {
+            activity.finish()
+        }
     }
 }
